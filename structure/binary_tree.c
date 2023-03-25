@@ -3,12 +3,12 @@
 
 typedef struct TreeNode {
     int val;
-    struct TreeNode *left;
-    struct TreeNode *right;
+    struct TreeNode* left;
+    struct TreeNode* right;
 } TreeNode;
 
-TreeNode *make_tree_node(const int val) {
-    TreeNode *node = malloc(sizeof(TreeNode));
+TreeNode* make_tree_node(const int val) {
+    TreeNode* node = malloc(sizeof(TreeNode));
     node->val = val;
     node->left = NULL;
     node->right = NULL;
@@ -17,10 +17,12 @@ TreeNode *make_tree_node(const int val) {
 }
 
 void test_make_tree_node() {
-    TreeNode *node = make_tree_node(1);
+    TreeNode* node = make_tree_node(1);
     node->val = 1;
 
     assert(node->val == 1);
+
+    free(node);
 }
 
 int main() { test_make_tree_node(); }

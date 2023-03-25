@@ -3,22 +3,46 @@
 
 typedef struct ListNode {
     int val;
-    struct TreeNode *next;
+    struct ListNode* next;
 } ListNode;
 
-ListNode *make_list_node(const int val) {
-    ListNode *node = malloc(sizeof(ListNode));
+typedef struct LinkedList {
+    ListNode* head;
+} LinkedList;
+
+ListNode* make_list_node(const int val) {
+    ListNode* node = malloc(sizeof(ListNode));
     node->val = val;
     node->next = NULL;
 
     return node;
 }
 
-void test_make_list_node() {
-    ListNode *node = make_list_node(1);
-    node->val = 1;
+LinkedList init_linked_list(const int* arr, const int len) {
+    LinkedList list;
 
-    assert(node->val == 1);
+    if (len == 0) {
+        return list;
+    }
+
+    ListNode* head = (ListNode*)malloc(sizeof(ListNode));
+    head->val = arr[0];
+
+    ListNode* curr = head;
+    for (int i = 1; i < len; i++) {
+        curr->next = (ListNode*)malloc(sizeof(ListNode));
+        curr = curr->next;
+    }
+
+    list.head = head;
+
+    return list;
 }
 
-int main() { test_make_list_node(); }
+void test_init_binary_tree() {}
+
+int main() {
+    int arr[] = {1, 2, 3, 4, 5};
+
+    LinkedList list = init_linked_list(arr, sizeof(arr) / sizeof(arr[0]));
+}
