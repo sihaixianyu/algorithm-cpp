@@ -1,6 +1,5 @@
 #include <algorithm>
 #include <cassert>
-#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -65,7 +64,7 @@ vector<int> LinkedList::traverse(ListNode* head) {
     return nums;
 }
 
-int main() {
+void test_new() {
     vector<int> nums = {1, 2, 3, 4, 5};
     auto list = new LinkedList(nums);
 
@@ -73,4 +72,19 @@ int main() {
     assert(ans == nums);
 
     delete list;
+}
+
+void test_traverse() {
+    vector<int> nums = {1, 2, 3, 4, 5};
+    auto list = new LinkedList(nums);
+
+    auto ans = list->traverse();
+    assert(ans == nums);
+
+    delete list;
+}
+
+int main() {
+    test_new();
+    test_traverse();
 }
