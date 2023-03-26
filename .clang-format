@@ -1,4 +1,10 @@
-BasedOnStyle: LLVM
+# Global
+BasedOnStyle: Google
+
+# Indent
 IndentWidth: 4
+AccessModifierOffset: -4
+
+# Pointer
+DerivePointerAlignment: false
 PointerAlignment: Left
-AllowShortFunctionsOnASingleLine: false
