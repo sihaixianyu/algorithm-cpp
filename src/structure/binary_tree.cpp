@@ -7,8 +7,8 @@ typedef struct TreeNode {
     struct TreeNode* right;
 } TreeNode;
 
-TreeNode* make_tree_node(const int val) {
-    TreeNode* node = malloc(sizeof(TreeNode));
+TreeNode* new_tree_node(const int val) {
+    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
     node->val = val;
     node->left = NULL;
     node->right = NULL;
@@ -16,8 +16,8 @@ TreeNode* make_tree_node(const int val) {
     return node;
 }
 
-void test_make_tree_node() {
-    TreeNode* node = make_tree_node(1);
+void test_init_tree_node() {
+    TreeNode* node = new_tree_node(1);
     node->val = 1;
 
     assert(node->val == 1);
@@ -25,4 +25,6 @@ void test_make_tree_node() {
     free(node);
 }
 
-int main() { test_make_tree_node(); }
+int main() {
+    test_init_tree_node();
+}

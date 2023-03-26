@@ -10,8 +10,8 @@ typedef struct LinkedList {
     ListNode* head;
 } LinkedList;
 
-ListNode* make_list_node(const int val) {
-    ListNode* node = malloc(sizeof(ListNode));
+ListNode* new_list_node(const int val) {
+    ListNode* node = (ListNode*)malloc(sizeof(ListNode));
     node->val = val;
     node->next = NULL;
 
@@ -39,7 +39,8 @@ LinkedList init_linked_list(const int* arr, const int len) {
     return list;
 }
 
-void test_init_binary_tree() {}
+void test_init_binary_tree() {
+}
 
 int main() {
     int arr[] = {1, 2, 3, 4, 5};
