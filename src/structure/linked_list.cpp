@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <cassert>
+#include <iostream>
 #include <vector>
 
 using namespace std;
@@ -18,39 +19,43 @@ public:
     ListNode* head;
 
     LinkedList() { head = nullptr; }
-
-    ~LinkedList() {
-        auto curr = this->head;
-
-        while (curr != nullptr) {
-            auto prev = curr;
-            curr = curr->next;
-            // Release the space of node.
-            delete prev;
-        }
-    }
-
-    LinkedList(const vector<int>& nums) {
-        if (nums.size() == 0) {
-            return;
-        }
-
-        auto head = new ListNode(nums[0]);
-        auto curr = head;
-
-        for (int i = 1; i < nums.size(); i++) {
-            auto node = new ListNode(nums[i]);
-            curr->next = node;
-            curr = curr->next;
-        }
-
-        this->head = head;
-    }
+    LinkedList(const vector<int>& nums);
+    ~LinkedList();
 
     vector<int> traverse() { return LinkedList::traverse(this->head); }
 
     static vector<int> traverse(ListNode* head);
 };
+
+LinkedList::LinkedList(const vector<int>& nums) {
+    if (nums.size() == 0) {
+        return;
+    }
+
+    auto head = new ListNode(nums[0]);
+    auto curr = head;
+
+    for (int i = 1; i < nums.size(); i++) {
+        auto node = new ListNode(nums[i]);
+        curr->next = node;
+        curr = curr->next;
+    }
+
+    this->head = head;
+}
+
+LinkedList::~LinkedList() {
+    cout << "destroy linked list" << endl;
+
+    auto curr = this->head;
+
+    while (curr != nullptr) {
+        auto prev = curr;
+        curr = curr->next;
+        // Release the space of node.
+        delete prev;
+    }
+}
 
 vector<int> LinkedList::traverse(ListNode* head) {
     auto nums = vector<int>();

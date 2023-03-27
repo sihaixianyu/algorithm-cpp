@@ -1,30 +1,114 @@
-#include <assert.h>
-#include <stdlib.h>
+#include <cassert>
+#include <deque>
+#include <iostream>
+#include <iterator>
+#include <vector>
 
-typedef struct TreeNode {
+using namespace std;
+
+#define null 1000000
+
+struct TreeNode {
     int val;
-    struct TreeNode* left;
-    struct TreeNode* right;
-} TreeNode;
+    TreeNode* left;
+    TreeNode* right;
+    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(int x, TreeNode* left, TreeNode* right)
+        : val(x), left(left), right(right) {}
+};
 
-TreeNode* new_tree_node(const int val) {
-    TreeNode* node = (TreeNode*)malloc(sizeof(TreeNode));
-    node->val = val;
-    node->left = NULL;
-    node->right = NULL;
+class BinaryTree {
+public:
+    TreeNode* root;
 
-    return node;
+    BinaryTree(TreeNode* root) : root(root) {}
+    BinaryTree(const vector<int>& nums);
+    ~BinaryTree();
+
+    vector<int> traverse_level() const;
+    vector<int> traverse_preorder();
+    vector<int> traverse_inorder();
+    vector<int> traverse_postorder();
+
+    static vector<int> level_traverse(const TreeNode* root);
+    static void destroy(TreeNode* root);
+};
+
+BinaryTree::BinaryTree(const vector<int>& nums) {
+    if (nums.empty()) return;
+
+    auto nodes = vector<TreeNode*>();
+
+    for (auto num : nums) {
+        if (num == null) {
+            nodes.push_back(nullptr);
+        }
+
+        auto node = new TreeNode(num);
+        nodes.push_back(node);
+    }
+
+    for (auto i = 0; i < nodes.size() / 2; i++) {
+        if (nodes[i] == nullptr) continue;
+
+        nodes[i]->left = nodes[2 * i + 1];
+        nodes[i]->right = nodes[2 * i + 2];
+    }
+
+    this->root = nodes[0];
 }
 
-void test_init_tree_node() {
-    TreeNode* node = new_tree_node(1);
-    node->val = 1;
+BinaryTree::~BinaryTree() {
+    cout << "destroy binary tree" << endl;
 
-    assert(node->val == 1);
-
-    free(node);
+    BinaryTree::destroy(this->root);
 }
 
-int main() {
-    test_init_tree_node();
+void BinaryTree::destroy(TreeNode* root) {
+    if (root == nullptr) {
+        return;
+    }
+
+    BinaryTree::destroy(root->left);
+    BinaryTree::destroy(root->right);
+    delete root;
 }
+
+vector<int> BinaryTree::traverse_level() const {
+    return BinaryTree::level_traverse(this->root);
+}
+
+vector<int> BinaryTree::level_traverse(const TreeNode* root) {
+    if (root == nullptr) return vector<int>();
+
+    auto ans = vector<int>();
+    auto dq = deque{root};
+
+    while (!dq.empty()) {
+        auto curr = dq.front();
+        dq.pop_front();
+        ans.push_back(curr->val);
+
+        if (curr->left != nullptr) {
+            dq.push_back(curr->left);
+        }
+        if (curr->right != nullptr) {
+            dq.push_back(curr->right);
+        }
+    }
+
+    return ans;
+}
+
+void test_new() {
+    auto nums = vector{1, 2, 3, 4, 5};
+    auto tree = new BinaryTree(nums);
+
+    auto ans = tree->traverse_level();
+    assert(ans == nums);
+
+    delete tree;
+}
+
+int main() { test_new(); }
