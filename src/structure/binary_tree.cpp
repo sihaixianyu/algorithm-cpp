@@ -1,5 +1,7 @@
+#include <algorithm>
 #include <cassert>
 #include <deque>
+#include <functional>
 #include <iostream>
 #include <iterator>
 #include <vector>
@@ -22,17 +24,13 @@ class BinaryTree {
 public:
     TreeNode* root;
 
-    BinaryTree(TreeNode* root) : root(root) {}
     BinaryTree(const vector<int>& nums);
     ~BinaryTree();
 
-    vector<int> traverse_level() const;
-    vector<int> traverse_preorder();
-    vector<int> traverse_inorder();
-    vector<int> traverse_postorder();
-
     static vector<int> level_traverse(const TreeNode* root);
-    static void destroy(TreeNode* root);
+    static vector<int> preorder_traverse(const TreeNode* root);
+    static vector<int> inorder_traverse(const TreeNode* root);
+    static vector<int> postorder_traverse(const TreeNode* root);
 };
 
 BinaryTree::BinaryTree(const vector<int>& nums) {
@@ -43,6 +41,7 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     for (auto num : nums) {
         if (num == null) {
             nodes.push_back(nullptr);
+            continue;
         }
 
         auto node = new TreeNode(num);
@@ -60,23 +59,20 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
 }
 
 BinaryTree::~BinaryTree() {
-    cout << "destroy binary tree" << endl;
+    function<void(TreeNode*)> destroy = [&](TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
 
-    BinaryTree::destroy(this->root);
-}
+        destroy(root->left);
+        destroy(root->right);
 
-void BinaryTree::destroy(TreeNode* root) {
-    if (root == nullptr) {
-        return;
-    }
+        // cout << "destroy node: " << root->val << endl;
+        delete root;
+    };
 
-    BinaryTree::destroy(root->left);
-    BinaryTree::destroy(root->right);
-    delete root;
-}
-
-vector<int> BinaryTree::traverse_level() const {
-    return BinaryTree::level_traverse(this->root);
+    destroy(this->root);
+    this->root = nullptr;
 }
 
 vector<int> BinaryTree::level_traverse(const TreeNode* root) {
@@ -101,14 +97,126 @@ vector<int> BinaryTree::level_traverse(const TreeNode* root) {
     return ans;
 }
 
+vector<int> BinaryTree::preorder_traverse(const TreeNode* root) {
+    auto ans = vector<int>();
+
+    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        ans.push_back(root->val);
+        helper(root->left);
+        helper(root->right);
+    };
+
+    helper(root);
+
+    return ans;
+}
+
+vector<int> BinaryTree::inorder_traverse(const TreeNode* root) {
+    auto ans = vector<int>();
+
+    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        helper(root->left);
+        ans.push_back(root->val);
+        helper(root->right);
+    };
+
+    helper(root);
+
+    return ans;
+}
+
+vector<int> BinaryTree::postorder_traverse(const TreeNode* root) {
+    auto ans = vector<int>();
+
+    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        helper(root->left);
+        helper(root->right);
+        ans.push_back(root->val);
+    };
+
+    helper(root);
+
+    return ans;
+}
+
+// Tests.
+
 void test_new() {
+    auto nums = vector{1, 2, null, 3};
+    auto tree = new BinaryTree(nums);
+
+    auto node1 = tree->root;
+    auto node2 = tree->root->left;
+    auto node3 = tree->root->left->left;
+
+    assert(node1->val == 1);
+    assert(node2->val == 2);
+    assert(node3->val == 3);
+
+    delete tree;
+}
+
+void test_level_traverse() {
     auto nums = vector{1, 2, 3, 4, 5};
     auto tree = new BinaryTree(nums);
 
-    auto ans = tree->traverse_level();
+    auto ans = BinaryTree::level_traverse(tree->root);
     assert(ans == nums);
 
     delete tree;
 }
 
-int main() { test_new(); }
+void test_preorder_traverse() {
+    auto nums = vector{1, 2, 3, 4, 5};
+    auto tree = new BinaryTree(nums);
+
+    auto ans = BinaryTree::preorder_traverse(tree->root);
+    auto expected = vector{1, 2, 4, 5, 3};
+
+    assert(ans == expected);
+
+    delete tree;
+}
+
+void test_inorder_traverse() {
+    auto nums = vector{1, 2, 3, 4, 5};
+    auto tree = new BinaryTree(nums);
+
+    auto ans = BinaryTree::inorder_traverse(tree->root);
+    auto expected = vector{4, 2, 5, 1, 3};
+
+    assert(ans == expected);
+
+    delete tree;
+}
+
+void test_postorder_traverse() {
+    auto nums = vector{1, 2, 3, 4, 5};
+    auto tree = new BinaryTree(nums);
+
+    auto ans = BinaryTree::postorder_traverse(tree->root);
+    auto expected = vector{4, 5, 2, 3, 1};
+
+    assert(ans == expected);
+
+    delete tree;
+}
+
+int main() {
+    test_new();
+    test_preorder_traverse();
+    test_inorder_traverse();
+    test_postorder_traverse();
+}

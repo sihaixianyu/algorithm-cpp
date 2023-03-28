@@ -55,6 +55,8 @@ LinkedList::~LinkedList() {
         // Release the space of node.
         delete prev;
     }
+
+    this->head = nullptr;
 }
 
 vector<int> LinkedList::traverse(ListNode* head) {

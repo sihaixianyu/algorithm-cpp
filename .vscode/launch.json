@@ -8,7 +8,7 @@
             "type": "lldb",
             "request": "launch",
             "name": "Debug",
-            "program": "${workspaceFolder}/build/src/structure/<executable file>",
+            "program": "${workspaceFolder}/build/src/structure/binary-tree",
             "args": [],
             "cwd": "${workspaceFolder}"
         }
