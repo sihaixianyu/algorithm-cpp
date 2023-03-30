@@ -48,11 +48,24 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
         nodes.push_back(node);
     }
 
-    for (auto i = 0; i < nodes.size() / 2; i++) {
-        if (nodes[i] == nullptr) continue;
+    for (auto i = 0; 2 * i + 1 < nodes.size(); i++) {
+        if (nodes[i] == nullptr) {
+            if (nodes[2 * i + 1] != nullptr) {
+                delete nodes[2 * i + 1];
+            }
+
+            if (2 * i + 2 < nodes.size() && nodes[2 * i + 2] != nullptr) {
+                delete nodes[2 * i + 2];
+            }
+
+            continue;
+        }
 
         nodes[i]->left = nodes[2 * i + 1];
-        nodes[i]->right = nodes[2 * i + 2];
+
+        if (2 * i + 2 < nodes.size()) {
+            nodes[i]->right = nodes[2 * i + 2];
+        }
     }
 
     this->root = nodes[0];

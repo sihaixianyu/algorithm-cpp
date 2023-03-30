@@ -1,3 +1,6 @@
+#include <fmt/core.h>
+#include <fmt/format.h>
+
 #include <algorithm>
 #include <cassert>
 #include <iostream>
@@ -87,6 +90,7 @@ void test_traverse() {
 
     auto ans = list->traverse();
     assert(ans == nums);
+    fmt::print("{}\n", ans[0]);
 
     delete list;
 }
