@@ -1,5 +1,6 @@
 #include <fmt/core.h>
 #include <fmt/format.h>
+#include <fmt/ranges.h>
 
 #include <algorithm>
 #include <cassert>
@@ -90,7 +91,7 @@ void test_traverse() {
 
     auto ans = list->traverse();
     assert(ans == nums);
-    fmt::print("{}\n", ans[0]);
+    fmt::print("{}\n", ans);
 
     delete list;
 }
