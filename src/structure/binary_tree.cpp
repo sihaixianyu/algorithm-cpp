@@ -8,7 +8,7 @@
 
 using namespace std;
 
-#define null 1000000
+#define null (1 << 30) - 1
 
 struct TreeNode {
     int val;
@@ -26,11 +26,6 @@ public:
 
     BinaryTree(const vector<int>& nums);
     ~BinaryTree();
-
-    static vector<int> level_traverse(const TreeNode* root);
-    static vector<int> preorder_traverse(const TreeNode* root);
-    static vector<int> inorder_traverse(const TreeNode* root);
-    static vector<int> postorder_traverse(const TreeNode* root);
 };
 
 BinaryTree::BinaryTree(const vector<int>& nums) {
@@ -88,7 +83,7 @@ BinaryTree::~BinaryTree() {
     this->root = nullptr;
 }
 
-vector<int> BinaryTree::level_traverse(const TreeNode* root) {
+vector<int> level_traverse(const TreeNode* root) {
     if (root == nullptr) return vector<int>();
 
     auto ans = vector<int>();
@@ -110,7 +105,7 @@ vector<int> BinaryTree::level_traverse(const TreeNode* root) {
     return ans;
 }
 
-vector<int> BinaryTree::preorder_traverse(const TreeNode* root) {
+vector<int> preorder_traverse(const TreeNode* root) {
     auto ans = vector<int>();
 
     function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
@@ -128,7 +123,7 @@ vector<int> BinaryTree::preorder_traverse(const TreeNode* root) {
     return ans;
 }
 
-vector<int> BinaryTree::inorder_traverse(const TreeNode* root) {
+vector<int> inorder_traverse(const TreeNode* root) {
     auto ans = vector<int>();
 
     function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
@@ -146,7 +141,7 @@ vector<int> BinaryTree::inorder_traverse(const TreeNode* root) {
     return ans;
 }
 
-vector<int> BinaryTree::postorder_traverse(const TreeNode* root) {
+vector<int> postorder_traverse(const TreeNode* root) {
     auto ans = vector<int>();
 
     function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
@@ -185,7 +180,7 @@ void test_level_traverse() {
     auto nums = vector{1, 2, 3, 4, 5};
     auto tree = new BinaryTree(nums);
 
-    auto ans = BinaryTree::level_traverse(tree->root);
+    auto ans = level_traverse(tree->root);
     assert(ans == nums);
 
     delete tree;
@@ -195,7 +190,7 @@ void test_preorder_traverse() {
     auto nums = vector{1, 2, 3, 4, 5};
     auto tree = new BinaryTree(nums);
 
-    auto ans = BinaryTree::preorder_traverse(tree->root);
+    auto ans = preorder_traverse(tree->root);
     auto expected = vector{1, 2, 4, 5, 3};
 
     assert(ans == expected);
@@ -207,7 +202,7 @@ void test_inorder_traverse() {
     auto nums = vector{1, 2, 3, 4, 5};
     auto tree = new BinaryTree(nums);
 
-    auto ans = BinaryTree::inorder_traverse(tree->root);
+    auto ans = inorder_traverse(tree->root);
     auto expected = vector{4, 2, 5, 1, 3};
 
     assert(ans == expected);
@@ -219,7 +214,7 @@ void test_postorder_traverse() {
     auto nums = vector{1, 2, 3, 4, 5};
     auto tree = new BinaryTree(nums);
 
-    auto ans = BinaryTree::postorder_traverse(tree->root);
+    auto ans = postorder_traverse(tree->root);
     auto expected = vector{4, 5, 2, 3, 1};
 
     assert(ans == expected);
