@@ -1,3 +1,5 @@
+#include <fmt/core.h>
+
 #include <algorithm>
 #include <cassert>
 #include <deque>
@@ -14,10 +16,12 @@ struct TreeNode {
     int val;
     TreeNode* left;
     TreeNode* right;
-    TreeNode() : val(0), left(nullptr), right(nullptr) {}
+
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(int x, TreeNode* left, TreeNode* right)
-        : val(x), left(left), right(right) {}
+    ~TreeNode() {
+        cout << fmt::format("TreeNode<{}> has been released", this->val)
+             << endl;
+    }
 };
 
 class BinaryTree {
@@ -43,13 +47,15 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
         nodes.push_back(node);
     }
 
-    for (auto i = 0; 2 * i + 1 < nodes.size(); i++) {
+    for (auto i = 0; i < nodes.size() / 2; i++) {
         if (nodes[i] == nullptr) {
             if (nodes[2 * i + 1] != nullptr) {
+                cout << "[CONSTRUCTOR]" << endl;
                 delete nodes[2 * i + 1];
             }
 
-            if (2 * i + 2 < nodes.size() && nodes[2 * i + 2] != nullptr) {
+            if (nodes[2 * i + 2] != nullptr) {
+                cout << "[CONSTRUCTOR]" << endl;
                 delete nodes[2 * i + 2];
             }
 
@@ -57,10 +63,7 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
         }
 
         nodes[i]->left = nodes[2 * i + 1];
-
-        if (2 * i + 2 < nodes.size()) {
-            nodes[i]->right = nodes[2 * i + 2];
-        }
+        nodes[i]->right = nodes[2 * i + 2];
     }
 
     this->root = nodes[0];
@@ -162,17 +165,18 @@ vector<int> postorder_traverse(const TreeNode* root) {
 // Tests.
 
 void test_new() {
-    auto nums = vector{1, 2, null, 3};
+    auto nums = vector{1, 2, 3, null, null, null, null, 5};
     auto tree = new BinaryTree(nums);
 
     auto node1 = tree->root;
     auto node2 = tree->root->left;
-    auto node3 = tree->root->left->left;
+    auto node3 = tree->root->right;
 
     assert(node1->val == 1);
     assert(node2->val == 2);
     assert(node3->val == 3);
 
+    cout << "[DESTRUCTOR]" << endl;
     delete tree;
 }
 
@@ -224,7 +228,7 @@ void test_postorder_traverse() {
 
 int main() {
     test_new();
-    test_preorder_traverse();
-    test_inorder_traverse();
-    test_postorder_traverse();
+    // test_preorder_traverse();
+    // test_inorder_traverse();
+    // test_postorder_traverse();
 }
