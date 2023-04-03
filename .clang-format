@@ -1,10 +1,14 @@
 # Global
-BasedOnStyle: Google
+BasedOnStyle: LLVM
 
 # Indent
 IndentWidth: 4
 AccessModifierOffset: -4
 
 # Pointer
-DerivePointerAlignment: false
 PointerAlignment: Left
+DerivePointerAlignment: false
+
+# Collapse
+ColumnLimit: 120
+AllowShortFunctionsOnASingleLine: Empty

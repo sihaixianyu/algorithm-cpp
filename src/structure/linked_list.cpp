@@ -22,7 +22,7 @@ class LinkedList {
 public:
     ListNode* head;
 
-    LinkedList() { head = nullptr; }
+    LinkedList() : head(nullptr) {}
     LinkedList(const vector<int>& nums);
     ~LinkedList();
 

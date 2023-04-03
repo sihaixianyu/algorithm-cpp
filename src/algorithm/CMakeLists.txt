@@ -1,11 +1,9 @@
-cmake_minimum_required(VERSION 3.0.0)
+find_package(fmt REQUIRED)
 
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED YES)
-
+# Sort
 set(SORT sort)
-
 add_executable(${SORT} sort.cpp)
+target_link_libraries(${SORT} PRIVATE fmt::fmt)
 
 include(CTest)
 enable_testing()
