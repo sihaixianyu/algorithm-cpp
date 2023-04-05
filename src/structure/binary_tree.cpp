@@ -22,9 +22,16 @@ struct TreeNode {
     TreeNode* right;
 
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
+    TreeNode(const TreeNode& other) : val(other.val), left(other.left), right(other.right){};
+    TreeNode& operator=(const TreeNode& other) {
+        this->val = other.val;
+        this->left = other.left;
+        this->right = other.right;
+
+        return *this;
+    };
     ~TreeNode() {
-        cout << fmt::format("TreeNode<{}> has been released", this->val)
-             << endl;
+        fmt::print("TreeNode<{}> has been released\n", this->val);
     }
 };
 
@@ -32,12 +39,16 @@ class BinaryTree {
 public:
     TreeNode* root;
 
+    BinaryTree(TreeNode* root) : root(nullptr){};
     BinaryTree(const vector<int>& nums);
+    BinaryTree(const BinaryTree& other);
+    BinaryTree& operator=(const BinaryTree& other);
     ~BinaryTree();
 };
 
 BinaryTree::BinaryTree(const vector<int>& nums) {
-    if (nums.empty()) return;
+    if (nums.empty())
+        return;
 
     auto nodes = vector<TreeNode*>();
 
@@ -70,6 +81,15 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     this->root = nodes[0];
 }
 
+BinaryTree::BinaryTree(const BinaryTree& other) {
+    // TODO
+}
+
+BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
+    // TODO
+    return *this;
+}
+
 BinaryTree::~BinaryTree() {
     function<void(TreeNode*)> destroy = [&](TreeNode* root) {
         if (root == nullptr) {
@@ -85,10 +105,11 @@ BinaryTree::~BinaryTree() {
     cout << "[DestroyTree]" << endl;
     destroy(this->root);
     this->root = nullptr;
-}
+};
 
 vector<int> level_traverse(const TreeNode* root) {
-    if (root == nullptr) return vector<int>();
+    if (root == nullptr)
+        return vector<int>();
 
     auto ans = vector<int>();
     auto dq = deque{root};
