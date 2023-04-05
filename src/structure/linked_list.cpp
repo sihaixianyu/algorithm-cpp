@@ -15,20 +15,20 @@ struct ListNode {
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode* next) : val(x), next(next) {}
-    ~ListNode() {}
+    ~ListNode() {
+        fmt::print("ListNode<{}> has been released\n", this->val);
+    }
 };
 
 class LinkedList {
 public:
     ListNode* head;
 
-    LinkedList() : head(nullptr) {}
+    LinkedList() : head(nullptr){};
     LinkedList(const vector<int>& nums);
+    LinkedList(const LinkedList& other);
+    LinkedList& operator=(const LinkedList& other);
     ~LinkedList();
-
-    vector<int> traverse() { return LinkedList::traverse(this->head); }
-
-    static vector<int> traverse(ListNode* head);
 };
 
 LinkedList::LinkedList(const vector<int>& nums) {
@@ -48,6 +48,15 @@ LinkedList::LinkedList(const vector<int>& nums) {
     this->head = head;
 }
 
+LinkedList::LinkedList(const LinkedList& other) {
+    // TODO
+}
+
+LinkedList& LinkedList::operator=(const LinkedList& other) {
+    // TODO
+    return *this;
+}
+
 LinkedList::~LinkedList() {
     cout << "destroy linked list" << endl;
 
@@ -63,7 +72,7 @@ LinkedList::~LinkedList() {
     this->head = nullptr;
 }
 
-vector<int> LinkedList::traverse(ListNode* head) {
+vector<int> traverse(ListNode* head) {
     auto nums = vector<int>();
     auto curr = head;
 
@@ -79,7 +88,7 @@ void test_new() {
     vector<int> nums = {1, 2, 3, 4, 5};
     auto list = new LinkedList(nums);
 
-    auto ans = list->traverse();
+    auto ans = traverse(list->head);
     assert(ans == nums);
 
     delete list;
@@ -89,9 +98,8 @@ void test_traverse() {
     vector<int> nums = {1, 2, 3, 4, 5};
     auto list = new LinkedList(nums);
 
-    auto ans = list->traverse();
+    auto ans = traverse(list->head);
     assert(ans == nums);
-    fmt::print("{}\n", ans);
 
     delete list;
 }
