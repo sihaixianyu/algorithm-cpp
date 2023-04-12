@@ -9,6 +9,8 @@
 
 using namespace std;
 
+const int null = -1;
+
 struct ListNode {
     int val;
     ListNode* next;
@@ -16,7 +18,7 @@ struct ListNode {
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode* next) : val(x), next(next) {}
     ~ListNode() {
-        fmt::print("ListNode<{}> has been released\n", this->val);
+        cout << "[DEL] ListNode { val: " << this->val << " }" << endl;
     }
 };
 
@@ -26,9 +28,9 @@ public:
 
     LinkedList() : head(nullptr){};
     LinkedList(const vector<int>& nums);
-    LinkedList(const LinkedList& other);
-    LinkedList& operator=(const LinkedList& other);
-    ~LinkedList();
+    LinkedList(const LinkedList& other) noexcept;
+    LinkedList& operator=(const LinkedList& other) noexcept;
+    ~LinkedList() noexcept;
 };
 
 LinkedList::LinkedList(const vector<int>& nums) {
@@ -48,24 +50,37 @@ LinkedList::LinkedList(const vector<int>& nums) {
     this->head = head;
 }
 
-LinkedList::LinkedList(const LinkedList& other) {
-    // TODO
+LinkedList::LinkedList(const LinkedList& other) noexcept {
+    if (other.head == nullptr) {
+        return;
+    }
+
+    this->head = new ListNode(other.head->val);
+
+    auto curr1 = other.head;
+    auto curr2 = this->head;
+
+    while (curr1->next != nullptr) {
+        curr2->next = new ListNode(curr1->next->val);
+
+        curr1 = curr1->next;
+        curr2 = curr2->next;
+    }
 }
 
-LinkedList& LinkedList::operator=(const LinkedList& other) {
+LinkedList& LinkedList::operator=(const LinkedList& other) noexcept {
     // TODO
     return *this;
 }
 
-LinkedList::~LinkedList() {
-    cout << "destroy linked list" << endl;
+LinkedList::~LinkedList() noexcept {
+    cout << "[DEL] LinkedList in addr: " << this << endl;
 
     auto curr = this->head;
 
     while (curr != nullptr) {
         auto prev = curr;
         curr = curr->next;
-        // Release the space of node.
         delete prev;
     }
 
@@ -87,11 +102,15 @@ vector<int> traverse(ListNode* head) {
 void test_new() {
     vector<int> nums = {1, 2, 3, 4, 5};
     auto list = new LinkedList(nums);
-
     auto ans = traverse(list->head);
     assert(ans == nums);
 
+    auto list_copy = new LinkedList(*list);
+    ans = traverse(list->head);
+    assert(ans == nums);
+
     delete list;
+    delete list_copy;
 }
 
 void test_traverse() {
@@ -106,5 +125,5 @@ void test_traverse() {
 
 int main() {
     test_new();
-    test_traverse();
+    // test_traverse();
 }

@@ -41,9 +41,9 @@ public:
 
     BinaryTree(TreeNode* root) : root(nullptr){};
     BinaryTree(const vector<int>& nums);
-    BinaryTree(const BinaryTree& other);
-    BinaryTree& operator=(const BinaryTree& other);
-    ~BinaryTree();
+    BinaryTree(const BinaryTree& other) noexcept;
+    BinaryTree& operator=(const BinaryTree& other) noexcept;
+    ~BinaryTree() noexcept;
 };
 
 BinaryTree::BinaryTree(const vector<int>& nums) {
@@ -55,12 +55,10 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     for (auto i = 0; i < nums.size(); i++) {
         if (nums[i] == null) {
             if (2 * i + 1 < nums.size() && nums[2 * i + 1] != null) {
-                throw invalid_argument(
-                    fmt::format("Invalid construct data: {}", nums));
+                throw invalid_argument(fmt::format("Invalid construct data: {}", nums));
             }
             if (2 * i + 2 < nums.size() && nums[2 * i + 2] != null) {
-                throw invalid_argument(
-                    fmt::format("Invalid construct data: {}", nums));
+                throw invalid_argument(fmt::format("Invalid construct data: {}", nums));
             }
 
             nodes.push_back(nullptr);
@@ -72,7 +70,8 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     }
 
     for (auto i = 0; i < nodes.size() / 2; i++) {
-        if (nodes[i] == nullptr) continue;
+        if (nodes[i] == nullptr)
+            continue;
 
         nodes[i]->left = nodes[2 * i + 1];
         nodes[i]->right = nodes[2 * i + 2];
@@ -81,16 +80,16 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     this->root = nodes[0];
 }
 
-BinaryTree::BinaryTree(const BinaryTree& other) {
+BinaryTree::BinaryTree(const BinaryTree& other) noexcept {
     // TODO
 }
 
-BinaryTree& BinaryTree::operator=(const BinaryTree& other) {
+BinaryTree& BinaryTree::operator=(const BinaryTree& other) noexcept {
     // TODO
     return *this;
 }
 
-BinaryTree::~BinaryTree() {
+BinaryTree::~BinaryTree() noexcept {
     function<void(TreeNode*)> destroy = [&](TreeNode* root) {
         if (root == nullptr) {
             return;
