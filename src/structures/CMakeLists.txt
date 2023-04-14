@@ -1,5 +1,7 @@
 find_package(fmt REQUIRED)
 
+include(CTest)
+
 # LinkedList
 set(LINKED_LIST linked-list)
 add_executable(${LINKED_LIST} linked_list.cpp)
@@ -10,8 +12,6 @@ set(BINARY_TREE binary-tree)
 add_executable(${BINARY_TREE} binary_tree.cpp)
 target_link_libraries(${BINARY_TREE} PRIVATE fmt::fmt)
 
-include(CTest)
 enable_testing()
-
 add_test(NAME test_linked_list  COMMAND ${LINKED_LIST})
 add_test(NAME test_binary_tree  COMMAND ${BINARY_TREE})

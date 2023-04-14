@@ -7,8 +7,16 @@
         {
             "type": "lldb",
             "request": "launch",
-            "name": "Debug",
+            "name": "Debug BinaryTree",
             "program": "${workspaceFolder}/build/src/structure/binary-tree",
+            "args": [],
+            "cwd": "${workspaceFolder}"
+        },
+        {
+            "type": "lldb",
+            "request": "launch",
+            "name": "Debug LinkedList",
+            "program": "${workspaceFolder}/build/src/structure/linked-list",
             "args": [],
             "cwd": "${workspaceFolder}"
         }

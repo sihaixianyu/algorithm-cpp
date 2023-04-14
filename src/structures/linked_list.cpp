@@ -1,11 +1,12 @@
-#include <fmt/core.h>
-#include <fmt/format.h>
-#include <fmt/ranges.h>
-
 #include <algorithm>
 #include <cassert>
 #include <iostream>
 #include <vector>
+
+#include <fmt/core.h>
+#include <fmt/format.h>
+#include <fmt/ranges.h>
+#include <gtest/gtest.h>
 
 using namespace std;
 
@@ -17,7 +18,7 @@ struct ListNode {
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode* next) : val(x), next(next) {}
-    ~ListNode() {
+    ~ListNode() noexcept {
         cout << "[DEL] ListNode { val: " << this->val << " }" << endl;
     }
 };
@@ -26,9 +27,9 @@ class LinkedList {
 public:
     ListNode* head;
 
-    LinkedList() : head(nullptr){};
-    LinkedList(const vector<int>& nums);
-    LinkedList(const LinkedList& other) noexcept;
+    explicit LinkedList() : head(nullptr){};
+    explicit LinkedList(const vector<int>& nums);
+    explicit LinkedList(const LinkedList& other) noexcept;
     LinkedList& operator=(const LinkedList& other) noexcept;
     ~LinkedList() noexcept;
 };
@@ -125,5 +126,5 @@ void test_traverse() {
 
 int main() {
     test_new();
-    // test_traverse();
+    test_traverse();
 }
