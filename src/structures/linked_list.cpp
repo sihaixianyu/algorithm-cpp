@@ -1,5 +1,4 @@
 #include <algorithm>
-#include <cassert>
 #include <iostream>
 #include <vector>
 
@@ -100,31 +99,36 @@ vector<int> traverse(ListNode* head) {
     return nums;
 }
 
-void test_new() {
-    vector<int> nums = {1, 2, 3, 4, 5};
-    auto list = new LinkedList(nums);
-    auto ans = traverse(list->head);
-    assert(ans == nums);
+namespace tests {
+class LinkedListTest : public testing::Test {
+protected:
+    vector<int> input_1;
+    vector<int> expected_1;
 
-    auto list_copy = new LinkedList(*list);
-    ans = traverse(list->head);
-    assert(ans == nums);
+    LinkedListTest() {
+        cout << "[NOTE] invoking constructor" << endl;
 
-    delete list;
-    delete list_copy;
+        this->input_1 = vector{1, 2, 3, 4};
+        this->expected_1 = vector{1, 2, 3, 4};
+    }
+
+    ~LinkedListTest() {
+        cout << "[NOTE] invoking destructor" << endl;
+    }
+};
+
+TEST_F(LinkedListTest, ConstructorTest) {
+    vector<int >ans;
+
+    auto list_1 = new LinkedList(this->input_1);
+    ans = traverse(list_1->head);
+    ASSERT_EQ(ans, this->expected_1);
+
+    auto list_2 = new LinkedList(*list_1);
+    ans = traverse(list_1->head);
+    ASSERT_EQ(ans, this->expected_1);
+
+    delete list_1;
+    delete list_2;
 }
-
-void test_traverse() {
-    vector<int> nums = {1, 2, 3, 4, 5};
-    auto list = new LinkedList(nums);
-
-    auto ans = traverse(list->head);
-    assert(ans == nums);
-
-    delete list;
-}
-
-int main() {
-    test_new();
-    test_traverse();
-}
+} // namespace tests
