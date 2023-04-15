@@ -118,7 +118,7 @@ protected:
 };
 
 TEST_F(LinkedListTest, ConstructorTest) {
-    vector<int >ans;
+    vector<int> ans;
 
     auto list_1 = new LinkedList(this->input_1);
     ans = traverse(list_1->head);

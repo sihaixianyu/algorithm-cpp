@@ -12,4 +12,4 @@ target_link_libraries(
 )
 
 enable_testing()
-gtest_discover_tests(${SORT})
+add_test(NAME test-sort  COMMAND ${SORT})

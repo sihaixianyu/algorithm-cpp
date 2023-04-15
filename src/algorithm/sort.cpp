@@ -1,3 +1,4 @@
+#include <any>
 #include <chrono>
 #include <cmath>
 #include <iostream>
@@ -42,7 +43,20 @@ vector<int> select_sort(const vector<int>& nums) {
 }
 
 vector<int> insert_sort(const vector<int>& nums) {
-    auto ans = vector<int>();
+    auto ans = vector<int>(nums);
+
+    for (auto i = 1; i < ans.size(); i++) {
+        auto ins_val = ans[i];
+        auto j = i - 1;
+        for (; j >= 0; j--) {
+            if (ans[j] <= ins_val) {
+                break;
+            }
+            ans[j + 1] = ans[j];
+        }
+        ans[j + 1] = ins_val;
+        fmt::print("{}\n", ans);
+    }
 
     return ans;
 }
@@ -89,11 +103,11 @@ protected:
     }
 
     void SetUp() override {
-        cout << "[NOTE] invoke setup method" << endl;
+        // cout << "[NOTE] invoke setup method" << endl;
     }
 
     void TearDown() override {
-        cout << "[NOTE] invoke teardown method" << endl;
+        // cout << "[NOTE] invoke teardown method" << endl;
     }
 };
 
@@ -115,13 +129,26 @@ TEST_F(SortTest, BubbleSortTest) {
 TEST_F(SortTest, SelectSortTest) {
     vector<int> ans;
 
-    ans = bubble_sort(this->input_1);
+    ans = select_sort(this->input_1);
     EXPECT_EQ(ans, this->expected_1);
 
-    ans = bubble_sort(this->input_2);
+    ans = select_sort(this->input_2);
     ASSERT_EQ(ans, this->expected_2);
 
-    ans = bubble_sort(this->input_3);
+    ans = select_sort(this->input_3);
+    ASSERT_EQ(ans, this->expected_3);
+}
+
+TEST_F(SortTest, InsertSortTest) {
+    vector<int> ans;
+
+    ans = insert_sort(this->input_1);
+    EXPECT_EQ(ans, this->expected_1);
+
+    ans = insert_sort(this->input_2);
+    ASSERT_EQ(ans, this->expected_2);
+
+    ans = insert_sort(this->input_3);
     ASSERT_EQ(ans, this->expected_3);
 }
 } // namespace tests

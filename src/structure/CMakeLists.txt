@@ -1,7 +1,6 @@
 find_package(GTest REQUIRED)
 find_package(fmt REQUIRED)
 
-include(CTest)
 include(GoogleTest)
 
 # LinkedList
@@ -18,9 +17,10 @@ set(BINARY_TREE binary-tree)
 add_executable(${BINARY_TREE} binary_tree.cpp)
 target_link_libraries(
     ${BINARY_TREE}
+    PRIVATE GTest::gtest_main
     PRIVATE fmt::fmt
 )
 
 enable_testing()
-add_test(NAME test_linked_list  COMMAND ${LINKED_LIST})
-add_test(NAME test_binary_tree  COMMAND ${BINARY_TREE})
+add_test(NAME test-linked-list  COMMAND ${LINKED_LIST})
+add_test(NAME test-binary-tree  COMMAND ${BINARY_TREE})

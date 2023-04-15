@@ -1,9 +1,3 @@
-#include <fmt/core.h>
-#include <fmt/ranges.h>
-
-#include <algorithm>
-#include <cassert>
-#include <cstdlib>
 #include <deque>
 #include <exception>
 #include <functional>
@@ -11,6 +5,10 @@
 #include <iterator>
 #include <stdexcept>
 #include <vector>
+
+#include <fmt/core.h>
+#include <fmt/ranges.h>
+#include <gtest/gtest.h>
 
 using namespace std;
 
@@ -39,9 +37,9 @@ class BinaryTree {
 public:
     TreeNode* root;
 
-    BinaryTree(TreeNode* root) : root(nullptr){};
-    BinaryTree(const vector<int>& nums);
-    BinaryTree(const BinaryTree& other) noexcept;
+    explicit BinaryTree(TreeNode* root) : root(nullptr){};
+    explicit BinaryTree(const vector<int>& nums);
+    explicit BinaryTree(const BinaryTree& other) noexcept;
     BinaryTree& operator=(const BinaryTree& other) noexcept;
     ~BinaryTree() noexcept;
 };
@@ -101,7 +99,6 @@ BinaryTree::~BinaryTree() noexcept {
         delete root;
     };
 
-    cout << "[DestroyTree]" << endl;
     destroy(this->root);
     this->root = nullptr;
 };
@@ -183,7 +180,8 @@ vector<int> postorder_traverse(const TreeNode* root) {
     return ans;
 }
 
-void test_new() {
+namespace tests {
+TEST(BinaryTreeTest, TestNew) {
     auto nums = vector{1, 2, 3};
 
     BinaryTree* tree;
@@ -199,15 +197,14 @@ void test_new() {
     auto node2 = tree->root->left;
     auto node3 = tree->root->right;
 
-    assert(node1->val == 1);
-    assert(node2->val == 2);
-    assert(node3->val == 3);
+    ASSERT_EQ(node1->val, 1);
+    ASSERT_EQ(node2->val, 2);
+    ASSERT_EQ(node3->val, 3);
 
-    cout << "[DESTRUCTOR]" << endl;
     delete tree;
 }
 
-void test_level_traverse() {
+TEST(BinaryTreeTest, TestLevelTraverse) {
     BinaryTree* tree;
 
     try {
@@ -218,13 +215,13 @@ void test_level_traverse() {
     }
 
     auto ans = level_traverse(tree->root);
-    auto expected = vector{1, 2, 3};
-    assert(ans == expected);
+    auto expected = vector{1, 2, 3, 4, 5};
+    ASSERT_EQ(ans, expected);
 
     delete tree;
 }
 
-void test_preorder_traverse() {
+TEST(BinaryTreeTest, TestPreorderTraverse) {
     BinaryTree* tree;
 
     try {
@@ -237,12 +234,12 @@ void test_preorder_traverse() {
     auto ans = preorder_traverse(tree->root);
     auto expected = vector{1, 2, 4, 5, 3};
 
-    assert(ans == expected);
+    ASSERT_EQ(ans, expected);
 
     delete tree;
 }
 
-void test_inorder_traverse() {
+TEST(BinaryTreeTest, TestInorderTraverse) {
     BinaryTree* tree;
 
     try {
@@ -255,12 +252,12 @@ void test_inorder_traverse() {
     auto ans = inorder_traverse(tree->root);
     auto expected = vector{4, 2, 5, 1, 3};
 
-    assert(ans == expected);
+    ASSERT_EQ(ans, expected);
 
     delete tree;
 }
 
-void test_postorder_traverse() {
+TEST(BinaryTreeTest, TestPostorderTraverse) {
     BinaryTree* tree;
 
     try {
@@ -273,14 +270,8 @@ void test_postorder_traverse() {
     auto ans = postorder_traverse(tree->root);
     auto expected = vector{4, 5, 2, 3, 1};
 
-    assert(ans == expected);
+    ASSERT_EQ(ans, expected);
 
     delete tree;
 }
-
-int main() {
-    test_new();
-    test_preorder_traverse();
-    test_inorder_traverse();
-    test_postorder_traverse();
-}
+} // namespace tests
