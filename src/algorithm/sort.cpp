@@ -1,6 +1,7 @@
 #include <any>
 #include <chrono>
 #include <cmath>
+#include <functional>
 #include <iostream>
 #include <thread>
 #include <vector>
@@ -55,7 +56,7 @@ vector<int> insert_sort(const vector<int>& nums) {
             ans[j + 1] = ans[j];
         }
         ans[j + 1] = ins_val;
-        fmt::print("{}\n", ans);
+        // fmt::print("{}\n", ans);
     }
 
     return ans;
@@ -68,7 +69,32 @@ vector<int> hill_sort(const vector<int>& nums) {
 }
 
 vector<int> quick_sort(const vector<int>& nums) {
-    auto ans = vector<int>();
+    auto ans = vector<int>(nums);
+
+    function<void(int, int)> helper = [&](int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        auto lp = left;
+        auto rp = right;
+
+        while (lp < rp) {
+            while (lp < rp && ans[lp] < ans[left]) {
+                lp += 1;
+            }
+            while (lp < rp && ans[rp] > ans[left]) {
+                rp -= 1;
+            }
+            swap(ans[lp], ans[rp]);
+        }
+        swap(ans[left], ans[lp]);
+
+        helper(left, lp - 1);
+        helper(lp + 1, right);
+    };
+
+    helper(0, ans.size() - 1);
 
     return ans;
 }
@@ -86,7 +112,7 @@ protected:
     vector<int> expected_1, expected_2, expected_3;
 
     SortTest() {
-        cout << "[NOTE] invoking constructor" << endl;
+        // cout << "[NOTE] invoking constructor" << endl;
 
         this->input_1 = vector{1, 2, 3, 4};
         this->expected_1 = vector{1, 2, 3, 4};
@@ -99,7 +125,7 @@ protected:
     }
 
     ~SortTest() {
-        cout << "[NOTE] invoking destructor" << endl;
+        // cout << "[NOTE] invoking destructor" << endl;
     }
 
     void SetUp() override {
@@ -112,43 +138,56 @@ protected:
 };
 
 TEST_F(SortTest, BubbleSortTest) {
-    vector<int> ans;
+    vector<int> real;
 
-    ans = bubble_sort(this->input_1);
-    ASSERT_EQ(ans, this->expected_1);
+    real = bubble_sort(this->input_1);
+    ASSERT_EQ(real, this->expected_1);
 
-    ans = bubble_sort(this->input_2);
-    ASSERT_EQ(ans, this->expected_2);
+    real = bubble_sort(this->input_2);
+    ASSERT_EQ(real, this->expected_2);
 
-    ans = bubble_sort(this->input_3);
-    ASSERT_EQ(ans, this->expected_3);
+    real = bubble_sort(this->input_3);
+    ASSERT_EQ(real, this->expected_3);
 
     this->expected_3.push_back(5);
 }
 
 TEST_F(SortTest, SelectSortTest) {
-    vector<int> ans;
+    vector<int> real;
 
-    ans = select_sort(this->input_1);
-    EXPECT_EQ(ans, this->expected_1);
+    real = select_sort(this->input_1);
+    EXPECT_EQ(real, this->expected_1);
 
-    ans = select_sort(this->input_2);
-    ASSERT_EQ(ans, this->expected_2);
+    real = select_sort(this->input_2);
+    ASSERT_EQ(real, this->expected_2);
 
-    ans = select_sort(this->input_3);
-    ASSERT_EQ(ans, this->expected_3);
+    real = select_sort(this->input_3);
+    ASSERT_EQ(real, this->expected_3);
 }
 
 TEST_F(SortTest, InsertSortTest) {
-    vector<int> ans;
+    vector<int> real;
 
-    ans = insert_sort(this->input_1);
-    EXPECT_EQ(ans, this->expected_1);
+    real = insert_sort(this->input_1);
+    EXPECT_EQ(real, this->expected_1);
 
-    ans = insert_sort(this->input_2);
-    ASSERT_EQ(ans, this->expected_2);
+    real = insert_sort(this->input_2);
+    ASSERT_EQ(real, this->expected_2);
 
-    ans = insert_sort(this->input_3);
-    ASSERT_EQ(ans, this->expected_3);
+    real = insert_sort(this->input_3);
+    ASSERT_EQ(real, this->expected_3);
+}
+
+TEST_F(SortTest, QuickSortTest) {
+    vector<int> real;
+
+    real = quick_sort(this->input_1);
+    EXPECT_EQ(real, this->expected_1);
+
+    real = quick_sort(this->input_2);
+    ASSERT_EQ(real, this->expected_2);
+
+    real = quick_sort(this->input_3);
+    ASSERT_EQ(real, this->expected_3);
 }
 } // namespace tests
