@@ -21,15 +21,8 @@ struct TreeNode {
 
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(const TreeNode& other) : val(other.val), left(other.left), right(other.right){};
-    TreeNode& operator=(const TreeNode& other) {
-        this->val = other.val;
-        this->left = other.left;
-        this->right = other.right;
-
-        return *this;
-    };
     ~TreeNode() {
-        fmt::print("TreeNode<{}> has been released\n", this->val);
+        fmt::print("[DEL] TreeNode {{ val: {} }}\n", this->val);
     }
 };
 
@@ -39,8 +32,10 @@ public:
 
     explicit BinaryTree(TreeNode* root) : root(nullptr){};
     explicit BinaryTree(const vector<int>& nums);
-    explicit BinaryTree(const BinaryTree& other) noexcept;
-    BinaryTree& operator=(const BinaryTree& other) noexcept;
+
+    BinaryTree(const BinaryTree& other) = delete;
+    BinaryTree& operator=(const BinaryTree& other) = delete;
+
     ~BinaryTree() noexcept;
 };
 
@@ -76,15 +71,6 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     }
 
     this->root = nodes[0];
-}
-
-BinaryTree::BinaryTree(const BinaryTree& other) noexcept {
-    // TODO
-}
-
-BinaryTree& BinaryTree::operator=(const BinaryTree& other) noexcept {
-    // TODO
-    return *this;
 }
 
 BinaryTree::~BinaryTree() noexcept {

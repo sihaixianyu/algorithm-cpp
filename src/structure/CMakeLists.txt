@@ -20,7 +20,3 @@ target_link_libraries(
     PRIVATE GTest::gtest_main
     PRIVATE fmt::fmt
 )
-
-enable_testing()
-add_test(NAME test-linked-list  COMMAND ${LINKED_LIST})
-add_test(NAME test-binary-tree  COMMAND ${BINARY_TREE})

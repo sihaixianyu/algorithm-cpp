@@ -10,6 +10,3 @@ target_link_libraries(
     PRIVATE GTest::gtest_main
     PRIVATE fmt::fmt
 )
-
-enable_testing()
-add_test(NAME test-sort  COMMAND ${SORT})

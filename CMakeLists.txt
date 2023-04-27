@@ -6,5 +6,3 @@ set(CMAKE_CXX_STANDARD_REQUIRED YES)
 
 add_subdirectory(src/algorithm)
 add_subdirectory(src/structure)
-
-enable_testing()

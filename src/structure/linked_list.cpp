@@ -28,8 +28,10 @@ public:
 
     explicit LinkedList() : head(nullptr){};
     explicit LinkedList(const vector<int>& nums);
-    explicit LinkedList(const LinkedList& other) noexcept;
-    LinkedList& operator=(const LinkedList& other) noexcept;
+
+    LinkedList(const LinkedList& other) = delete;
+    LinkedList& operator=(const LinkedList& other) = delete;
+
     ~LinkedList() noexcept;
 };
 
@@ -48,29 +50,6 @@ LinkedList::LinkedList(const vector<int>& nums) {
     }
 
     this->head = head;
-}
-
-LinkedList::LinkedList(const LinkedList& other) noexcept {
-    if (other.head == nullptr) {
-        return;
-    }
-
-    this->head = new ListNode(other.head->val);
-
-    auto curr1 = other.head;
-    auto curr2 = this->head;
-
-    while (curr1->next != nullptr) {
-        curr2->next = new ListNode(curr1->next->val);
-
-        curr1 = curr1->next;
-        curr2 = curr2->next;
-    }
-}
-
-LinkedList& LinkedList::operator=(const LinkedList& other) noexcept {
-    // TODO
-    return *this;
 }
 
 LinkedList::~LinkedList() noexcept {
@@ -106,29 +85,20 @@ protected:
     vector<int> expected_1;
 
     LinkedListTest() {
-        cout << "[NOTE] invoking constructor" << endl;
-
         this->input_1 = vector{1, 2, 3, 4};
         this->expected_1 = vector{1, 2, 3, 4};
     }
 
-    ~LinkedListTest() {
-        cout << "[NOTE] invoking destructor" << endl;
-    }
+    ~LinkedListTest() {}
 };
 
 TEST_F(LinkedListTest, ConstructorTest) {
     vector<int> ans;
 
-    auto list_1 = new LinkedList(this->input_1);
-    ans = traverse(list_1->head);
+    auto list = new LinkedList(this->input_1);
+    ans = traverse(list->head);
     ASSERT_EQ(ans, this->expected_1);
 
-    auto list_2 = new LinkedList(*list_1);
-    ans = traverse(list_1->head);
-    ASSERT_EQ(ans, this->expected_1);
-
-    delete list_1;
-    delete list_2;
+    delete list;
 }
 } // namespace tests
