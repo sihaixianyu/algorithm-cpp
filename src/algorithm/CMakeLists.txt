@@ -1,8 +1,6 @@
 find_package(GTest REQUIRED)
 find_package(fmt REQUIRED)
 
-include(GoogleTest)
-
 set(SORT sort)
 add_executable(${SORT} sort.cpp)
 target_link_libraries(

@@ -1,8 +1,6 @@
 find_package(GTest REQUIRED)
 find_package(fmt REQUIRED)
 
-include(GoogleTest)
-
 # LinkedList
 set(LINKED_LIST linked-list)
 add_executable(${LINKED_LIST} linked_list.cpp)

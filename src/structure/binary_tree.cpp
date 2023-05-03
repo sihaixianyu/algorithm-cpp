@@ -2,8 +2,8 @@
 #include <exception>
 #include <functional>
 #include <iostream>
-#include <iterator>
 #include <stdexcept>
+#include <tuple>
 #include <vector>
 
 #include <fmt/core.h>
@@ -130,6 +130,34 @@ vector<int> preorder_traverse(const TreeNode* root) {
     return ans;
 }
 
+vector<int> preorder_loop(const TreeNode* root) {
+    auto ans = vector<int>();
+    auto stk = vector{make_tuple(root, 0)};
+
+    while (!stk.empty()) {
+        auto [node, tag] = stk.back();
+        stk.pop_back();
+
+        if (tag == 1) {
+            ans.push_back(node->val);
+            cout << fmt::format("Node {{ val: {} }}", node->val) << endl;
+            continue;
+        }
+
+        if (node->right != nullptr) {
+            stk.push_back(make_tuple(node->right, 0));
+        }
+
+        if (node->left != nullptr) {
+            stk.push_back(make_tuple(node->left, 0));
+        }
+
+        stk.push_back(make_tuple(node, 1));
+    }
+
+    return ans;
+}
+
 vector<int> inorder_traverse(const TreeNode* root) {
     auto ans = vector<int>();
 
@@ -148,6 +176,34 @@ vector<int> inorder_traverse(const TreeNode* root) {
     return ans;
 }
 
+vector<int> inorder_loop(const TreeNode* root) {
+    auto ans = vector<int>();
+    auto stk = vector{make_tuple(root, 0)};
+
+    while (!stk.empty()) {
+        auto [node, tag] = stk.back();
+        stk.pop_back();
+
+        if (tag == 1) {
+            ans.push_back(node->val);
+            cout << fmt::format("Node {{ val: {} }}", node->val) << endl;
+            continue;
+        }
+
+        if (node->right != nullptr) {
+            stk.push_back(make_tuple(node->right, 0));
+        }
+
+        stk.push_back(make_tuple(node, 1));
+
+        if (node->left != nullptr) {
+            stk.push_back(make_tuple(node->left, 0));
+        }
+    }
+
+    return ans;
+}
+
 vector<int> postorder_traverse(const TreeNode* root) {
     auto ans = vector<int>();
 
@@ -162,6 +218,34 @@ vector<int> postorder_traverse(const TreeNode* root) {
     };
 
     helper(root);
+
+    return ans;
+}
+
+vector<int> postorder_loop(const TreeNode* root) {
+    auto ans = vector<int>();
+    auto stk = vector{make_tuple(root, 0)};
+
+    while (!stk.empty()) {
+        auto [node, tag] = stk.back();
+        stk.pop_back();
+
+        if (tag == 1) {
+            ans.push_back(node->val);
+            cout << fmt::format("Node {{ val: {} }}", node->val) << endl;
+            continue;
+        }
+
+        stk.push_back(make_tuple(node, 1));
+
+        if (node->right != nullptr) {
+            stk.push_back(make_tuple(node->right, 0));
+        }
+
+        if (node->left != nullptr) {
+            stk.push_back(make_tuple(node->left, 0));
+        }
+    }
 
     return ans;
 }
@@ -225,7 +309,43 @@ TEST(BinaryTreeTest, TestPreorderTraverse) {
     delete tree;
 }
 
+TEST(BinaryTreeTest, TestPreorderLoop) {
+    BinaryTree* tree;
+
+    try {
+        tree = new BinaryTree({1, 2, 3, 4, 5});
+    } catch (invalid_argument& e) {
+        cout << e.what() << endl;
+        exit(1);
+    }
+
+    auto ans = preorder_loop(tree->root);
+    auto expected = vector{1, 2, 4, 5, 3};
+
+    ASSERT_EQ(ans, expected);
+
+    delete tree;
+}
+
 TEST(BinaryTreeTest, TestInorderTraverse) {
+    BinaryTree* tree;
+
+    try {
+        tree = new BinaryTree({1, 2, 3, 4, 5});
+    } catch (invalid_argument& e) {
+        cout << e.what() << endl;
+        exit(1);
+    }
+
+    auto ans = inorder_traverse(tree->root);
+    auto expected = vector{4, 2, 5, 1, 3};
+
+    ASSERT_EQ(ans, expected);
+
+    delete tree;
+}
+
+TEST(BinaryTreeTest, TestInorderLoop) {
     BinaryTree* tree;
 
     try {
@@ -255,6 +375,24 @@ TEST(BinaryTreeTest, TestPostorderTraverse) {
 
     auto ans = postorder_traverse(tree->root);
     auto expected = vector{4, 5, 2, 3, 1};
+
+    ASSERT_EQ(ans, expected);
+
+    delete tree;
+}
+
+TEST(BinaryTreeTest, TestPostorderLoop) {
+    BinaryTree* tree;
+
+    try {
+        tree = new BinaryTree({1, 2, 3, 4, 5});
+    } catch (invalid_argument& e) {
+        cout << e.what() << endl;
+        exit(1);
+    }
+
+    auto ans = inorder_traverse(tree->root);
+    auto expected = vector{4, 2, 5, 1, 3};
 
     ASSERT_EQ(ans, expected);
 
