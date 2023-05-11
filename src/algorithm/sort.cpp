@@ -50,7 +50,6 @@ vector<int> insert_sort(const vector<int>& nums) {
             ans[j + 1] = ans[j];
         }
         ans[j + 1] = ins_val;
-        // fmt::print("{}\n", ans);
     }
 
     return ans;
