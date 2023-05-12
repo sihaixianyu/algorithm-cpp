@@ -3,6 +3,7 @@
 #include <vector>
 
 #include <fmt/core.h>
+#include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
 using namespace std;
@@ -55,9 +56,29 @@ vector<int> insert_sort(const vector<int>& nums) {
     return ans;
 }
 
-// TODO: Hill Sort
-vector<int> hill_sort(const vector<int>& nums) {
-    auto ans = vector<int>();
+vector<int> shell_sort(const vector<int>& nums) {
+    auto ans = vector<int>(nums);
+
+    function<void(int)> helper = [&](int gap) {
+        for (auto i = gap; i < ans.size(); i += 1) {
+            auto temp = ans[i];
+
+            fmt::print("ins: {}, before: {}\n", temp, ans);
+
+            auto j = i;
+            for (; j >= gap && ans[j - gap] > temp; j -= gap) {
+                ans[j] = ans[j - gap];
+            }
+            ans[j] = temp;
+
+            fmt::print("ins: {}, after: {}\n", temp, ans);
+        }
+        fmt::print("[GAP Used] gap: {}, ans: {}\n", gap, ans);
+    };
+
+    for (auto gap = ans.size() / 2; gap > 0; gap /= 2) {
+        helper(gap);
+    }
 
     return ans;
 }
@@ -132,7 +153,7 @@ protected:
     }
 };
 
-TEST_F(SortTest, BubbleSortTest) {
+TEST_F(SortTest, test_bubble_sort) {
     vector<int> real;
 
     real = bubble_sort(this->input1);
@@ -147,7 +168,7 @@ TEST_F(SortTest, BubbleSortTest) {
     this->expected3.push_back(5);
 }
 
-TEST_F(SortTest, SelectSortTest) {
+TEST_F(SortTest, test_select_sort) {
     vector<int> real;
 
     real = select_sort(this->input1);
@@ -160,7 +181,7 @@ TEST_F(SortTest, SelectSortTest) {
     ASSERT_EQ(real, this->expected3);
 }
 
-TEST_F(SortTest, InsertSortTest) {
+TEST_F(SortTest, test_insert_sort) {
     vector<int> real;
 
     real = insert_sort(this->input1);
@@ -173,7 +194,20 @@ TEST_F(SortTest, InsertSortTest) {
     ASSERT_EQ(real, this->expected3);
 }
 
-TEST_F(SortTest, QuickSortTest) {
+TEST_F(SortTest, test_shell_sort) {
+    vector<int> real;
+
+    // real = shell_sort(this->input1);
+    // EXPECT_EQ(real, this->expected1);
+
+    real = shell_sort(this->input2);
+    ASSERT_EQ(real, this->expected2);
+
+    real = shell_sort(this->input3);
+    ASSERT_EQ(real, this->expected3);
+}
+
+TEST_F(SortTest, test_quick_sort) {
     vector<int> real;
 
     real = quick_sort(this->input1);
