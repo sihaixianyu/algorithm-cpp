@@ -35,6 +35,7 @@ public:
 
 LinkedList::LinkedList(const vector<int>& nums) {
     if (nums.size() == 0) {
+
         return;
     }
 

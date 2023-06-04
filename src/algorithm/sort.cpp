@@ -1,3 +1,4 @@
+#include <algorithm>
 #include <functional>
 #include <iostream>
 #include <vector>
@@ -62,18 +63,16 @@ vector<int> shell_sort(const vector<int>& nums) {
     function<void(int)> helper = [&](int gap) {
         for (auto i = gap; i < ans.size(); i += 1) {
             auto temp = ans[i];
-
-            fmt::print("ins: {}, before: {}\n", temp, ans);
+            // fmt::print("ins: {}, before: {}\n", temp, ans);
 
             auto j = i;
             for (; j >= gap && ans[j - gap] > temp; j -= gap) {
                 ans[j] = ans[j - gap];
             }
             ans[j] = temp;
-
-            fmt::print("ins: {}, after: {}\n", temp, ans);
+            // fmt::print("ins: {}, after: {}\n", temp, ans);
         }
-        fmt::print("[GAP Used] gap: {}, ans: {}\n", gap, ans);
+        // fmt::print("[GAP Used] gap: {}, ans: {}\n", gap, ans);
     };
 
     for (auto gap = ans.size() / 2; gap > 0; gap /= 2) {
@@ -114,9 +113,53 @@ vector<int> quick_sort(const vector<int>& nums) {
     return ans;
 }
 
-// TODO: Merge Sort
 vector<int> merge_sort(const vector<int>& nums) {
-    auto ans = vector<int>();
+    auto ans = vector<int>(nums);
+
+    auto merge = [&](int left, int mid, int right) {
+        auto lp = left;
+        auto rp = mid + 1;
+        auto tmp = vector<int>();
+
+        while (lp <= mid && rp <= right) {
+            if (ans[lp] < ans[rp]) {
+                tmp.push_back(ans[lp]);
+                lp += 1;
+            } else {
+                tmp.push_back(ans[rp]);
+                rp += 1;
+            }
+        }
+
+        while (lp <= mid) {
+            tmp.push_back(ans[lp]);
+            lp += 1;
+        }
+        while (rp <= right) {
+            tmp.push_back(ans[rp]);
+            rp += 1;
+        }
+        // fmt::print("merge => {}-{}-{} tmp: {}, ans: {}\n", left, mid, right, tmp, ans);
+
+        for (auto i = left; i <= right; i++) {
+            ans[i] = tmp[i-left];
+        }
+    };
+
+    function<void(int, int)> helper = [&](int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        auto mid = left + (right - left) / 2;
+        // fmt::print("divide => (left, mid, right) = ({}, {}, {})\n", left, mid, right);
+
+        helper(left, mid);
+        helper(mid + 1, right);
+        merge(left, mid, right);
+    };
+
+    helper(0, ans.size() - 1);
 
     return ans;
 }
@@ -217,6 +260,19 @@ TEST_F(SortTest, test_quick_sort) {
     ASSERT_EQ(real, this->expected2);
 
     real = quick_sort(this->input3);
+    ASSERT_EQ(real, this->expected3);
+}
+
+TEST_F(SortTest, test_merge_sort) {
+    vector<int> real;
+
+    real = merge_sort(this->input1);
+    EXPECT_EQ(real, this->expected1);
+
+    real = merge_sort(this->input2);
+    ASSERT_EQ(real, this->expected2);
+
+    real = merge_sort(this->input3);
     ASSERT_EQ(real, this->expected3);
 }
 } // namespace tests
