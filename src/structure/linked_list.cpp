@@ -7,8 +7,6 @@
 
 using namespace std;
 
-const int null = -1;
-
 struct ListNode {
     int val;
     ListNode* next;

@@ -42,9 +42,7 @@ protected:
 
     SolutionTest() { this->solu = Solution(); }
 
-    void SetUp() override {
-        testing::internal::CaptureStdout();
-    }
+    void SetUp() override { testing::internal::CaptureStdout(); }
 
     void TearDown() override {
         this->stdout = testing::internal::GetCapturedStdout();
