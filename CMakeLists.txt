@@ -8,6 +8,7 @@ set(CMAKE_BUILD_TYPE Debug)
 set(CMAKE_CXX_FLAGS "-g3 -O0")
 
 set(CMAKE_PREFIX_PATH $ENV{VCPKG_HOME})
+set(CMAKE_TOOLCHAIN_FILE "${VCPKG_HOME}/scripts/buildsystems/vcpkg.cmake")
 
 add_subdirectory(src/algorithm)
 add_subdirectory(src/structure)

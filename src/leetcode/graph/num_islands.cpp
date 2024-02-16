@@ -4,8 +4,8 @@
 using namespace std;
 
 class Solution {
-  public:
-    int numIslands(vector<vector<char>> &grid) {
+public:
+    int numIslands(vector<vector<char>>& grid) {
         for (auto i = 0; i < grid.size(); i++) {
             for (auto j = 0; j < grid[0].size(); j++) {
                 if (grid[i][j] == '1') {
@@ -17,7 +17,7 @@ class Solution {
         return this->ans;
     }
 
-    void sinkIslands(vector<vector<char>> &grid, int x, int y) {
+    void sinkIslands(vector<vector<char>>& grid, int x, int y) {
         if (x < 0 || x >= grid.size()) {
             return;
         }
@@ -34,16 +34,18 @@ class Solution {
         this->sinkIslands(grid, x, y + 1);
     }
 
-  private:
+private:
     int ans;
 };
 
 namespace tests {
 class SolutionTest : public testing::Test {
-  protected:
+protected:
     Solution solu;
 
-    SolutionTest() { this->solu = Solution(); }
+    SolutionTest() {
+        this->solu = Solution();
+    }
 };
 
 TEST_F(SolutionTest, test_case1) {

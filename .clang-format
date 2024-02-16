@@ -1,4 +1,20 @@
+# Global
+Language: Cpp
 BasedOnStyle: LLVM
+
+# Indent
+UseTab: Never
 IndentWidth: 4
 AccessModifierOffset: -4
+
+# Pointer
 PointerAlignment: Left
+DerivePointerAlignment: false
+
+# Collapse
+ColumnLimit: 120
+AllowShortFunctionsOnASingleLine: Empty
+
+# Function
+BinPackParameters: false
+AllowAllParametersOfDeclarationOnNextLine: false

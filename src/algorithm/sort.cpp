@@ -9,7 +9,7 @@
 using namespace std;
 
 namespace sort {
-vector<int> bubble_sort(vector<int>& nums) {
+vector<int> bubble_sort(vector<int> &nums) {
     auto ans = vector(nums);
 
     for (auto i = ans.size() - 1; i > 0; i--) {
@@ -23,7 +23,7 @@ vector<int> bubble_sort(vector<int>& nums) {
     return ans;
 }
 
-vector<int> select_sort(const vector<int>& nums) {
+vector<int> select_sort(const vector<int> &nums) {
     auto ans = vector(nums);
 
     for (auto i = 0; i < nums.size() - 1; i++) {
@@ -39,7 +39,7 @@ vector<int> select_sort(const vector<int>& nums) {
     return ans;
 }
 
-vector<int> insert_sort(const vector<int>& nums) {
+vector<int> insert_sort(const vector<int> &nums) {
     auto ans = vector<int>(nums);
 
     for (auto i = 1; i < ans.size(); i++) {
@@ -57,7 +57,7 @@ vector<int> insert_sort(const vector<int>& nums) {
     return ans;
 }
 
-vector<int> shell_sort(const vector<int>& nums) {
+vector<int> shell_sort(const vector<int> &nums) {
     auto ans = vector<int>(nums);
 
     function<void(int)> helper = [&](int gap) {
@@ -82,7 +82,7 @@ vector<int> shell_sort(const vector<int>& nums) {
     return ans;
 }
 
-vector<int> quick_sort(const vector<int>& nums) {
+vector<int> quick_sort(const vector<int> &nums) {
     auto ans = vector<int>(nums);
 
     function<void(int, int)> helper = [&](int left, int right) {
@@ -113,7 +113,7 @@ vector<int> quick_sort(const vector<int>& nums) {
     return ans;
 }
 
-vector<int> merge_sort(const vector<int>& nums) {
+vector<int> merge_sort(const vector<int> &nums) {
     auto ans = vector<int>(nums);
 
     auto merge = [&](int left, int mid, int right) {

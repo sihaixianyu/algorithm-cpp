@@ -1,8 +1,8 @@
 #include <fmt/core.h>
 #include <functional>
 #include <gtest/gtest.h>
-#include <vector>
 #include <queue>
+#include <vector>
 
 using namespace std;
 
@@ -10,7 +10,7 @@ class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
         auto pq = priority_queue<int, vector<int>, greater<int>>();
-        for (auto elem: nums) {
+        for (auto elem : nums) {
             pq.push(elem);
             if (pq.size() > k) {
                 pq.pop();
