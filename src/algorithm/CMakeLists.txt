@@ -1,18 +1,16 @@
 find_package(fmt REQUIRED)
 find_package(GTest REQUIRED)
 
-set(SORT sort)
-add_executable(${SORT} sort.cpp)
+add_executable(sort sort.cpp)
 target_link_libraries(
-    ${SORT}
+    sort
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
 
-set(BINARY_SEARCH binary-search)
-add_executable(${BINARY_SEARCH} binary_search.cpp)
+add_executable(binary_search binary_search.cpp)
 target_link_libraries(
-    ${BINARY_SEARCH}
+    binary_search
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )

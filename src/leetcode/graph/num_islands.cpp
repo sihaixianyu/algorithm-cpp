@@ -41,10 +41,10 @@ private:
 namespace tests {
 class SolutionTest : public testing::Test {
 protected:
-    Solution solu;
+    Solution solution;
 
     SolutionTest() {
-        this->solu = Solution();
+        this->solution = Solution();
     }
 };
 
@@ -56,7 +56,7 @@ TEST_F(SolutionTest, test_case1) {
         vector{'0', '0', '0', '0', '0'},
     };
     auto expected = 1;
-    auto island_num = this->solu.numIslands(grid);
+    auto island_num = this->solution.numIslands(grid);
     ASSERT_EQ(island_num, expected);
 }
 
@@ -68,7 +68,7 @@ TEST_F(SolutionTest, test_case2) {
         vector{'0', '0', '0', '1', '1'},
     };
     auto expected = 3;
-    auto island_num = this->solu.numIslands(grid);
+    auto island_num = this->solution.numIslands(grid);
     ASSERT_EQ(island_num, expected);
 }
 } // namespace tests

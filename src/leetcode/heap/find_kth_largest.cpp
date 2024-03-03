@@ -23,11 +23,15 @@ public:
 namespace tests {
 class SolutionTest : public testing::Test {
 protected:
-    Solution solu;
+    Solution solution;
 
-    SolutionTest() { this->solu = Solution(); }
+    SolutionTest() {
+        this->solution = Solution();
+    }
 
-    void SetUp() override { testing::internal::CaptureStdout(); }
+    void SetUp() override {
+        testing::internal::CaptureStdout();
+    }
 
     void TearDown() override {
         this->stdout = testing::internal::GetCapturedStdout();
@@ -42,14 +46,14 @@ protected:
 TEST_F(SolutionTest, test_case_1) {
     auto nums = vector{3, 2, 1, 5, 6, 4};
     auto k = 2;
-    auto res = this->solu.findKthLargest(nums, k);
+    auto res = this->solution.findKthLargest(nums, k);
     ASSERT_EQ(res, 5);
 }
 
 TEST_F(SolutionTest, test_case_2) {
     auto nums = vector{3, 2, 3, 1, 2, 4, 5, 5, 6};
     auto k = 4;
-    auto res = this->solu.findKthLargest(nums, k);
+    auto res = this->solution.findKthLargest(nums, k);
     ASSERT_EQ(res, 4);
 }
 } // namespace tests

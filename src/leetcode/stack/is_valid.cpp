@@ -38,11 +38,15 @@ public:
 namespace tests {
 class SolutionTest : public testing::Test {
 protected:
-    Solution solu;
+    Solution solution;
 
-    SolutionTest() { this->solu = Solution(); }
+    SolutionTest() {
+        this->solution = Solution();
+    }
 
-    void SetUp() override { testing::internal::CaptureStdout(); }
+    void SetUp() override {
+        testing::internal::CaptureStdout();
+    }
 
     void TearDown() override {
         this->stdout = testing::internal::GetCapturedStdout();
@@ -56,19 +60,19 @@ protected:
 
 TEST_F(SolutionTest, test_case_1) {
     auto s = "()";
-    auto res = this->solu.isValid(s);
+    auto res = this->solution.isValid(s);
     ASSERT_TRUE(res);
 }
 
 TEST_F(SolutionTest, test_case_2) {
     auto s = "()[]{}";
-    auto res = this->solu.isValid(s);
+    auto res = this->solution.isValid(s);
     ASSERT_TRUE(res);
 }
 
 TEST_F(SolutionTest, test_case_3) {
     auto s = "(]";
-    auto res = this->solu.isValid(s);
+    auto res = this->solution.isValid(s);
     ASSERT_FALSE(res);
 }
 } // namespace tests
