@@ -1,5 +1,4 @@
 #include <deque>
-#include <exception>
 #include <functional>
 #include <iostream>
 #include <stdexcept>
@@ -20,9 +19,10 @@ struct TreeNode {
     TreeNode* right;
 
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(const TreeNode& other)
-        : val(other.val), left(other.left), right(other.right){};
-    ~TreeNode() { fmt::print("[DEL] TreeNode {{ val: {} }}\n", this->val); }
+    TreeNode(const TreeNode& other) : val(other.val), left(other.left), right(other.right){};
+    ~TreeNode() {
+        fmt::print("[DEL] TreeNode {{ val: {} }}\n", this->val);
+    }
 };
 
 class BinaryTree {
@@ -47,12 +47,10 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
     for (auto i = 0; i < nums.size(); i++) {
         if (nums[i] == null) {
             if (2 * i + 1 < nums.size() && nums[2 * i + 1] != null) {
-                throw invalid_argument(
-                    fmt::format("Invalid construct data: {}", nums));
+                throw invalid_argument(fmt::format("Invalid construct data: {}", nums));
             }
             if (2 * i + 2 < nums.size() && nums[2 * i + 2] != null) {
-                throw invalid_argument(
-                    fmt::format("Invalid construct data: {}", nums));
+                throw invalid_argument(fmt::format("Invalid construct data: {}", nums));
             }
 
             nodes.push_back(nullptr);
