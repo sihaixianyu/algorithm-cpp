@@ -3,7 +3,8 @@
 #include <gtest/gtest.h>
 #include <stack>
 
-using namespace std;
+namespace is_valid {
+using std::string;
 
 class Solution {
 public:
@@ -76,3 +77,4 @@ TEST_F(SolutionTest, test_case_3) {
     ASSERT_FALSE(res);
 }
 } // namespace tests
+} // namespace is_valid

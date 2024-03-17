@@ -5,7 +5,11 @@
 #include <gtest/gtest.h>
 
 namespace binary_search {
-std::optional<int> search(std::vector<int> nums, int target) {
+using std::nullopt;
+using std::optional;
+using std::vector;
+
+optional<int> search(vector<int>& nums, int target) {
     auto left = 0;
     auto right = nums.size();
 
@@ -23,7 +27,7 @@ std::optional<int> search(std::vector<int> nums, int target) {
     return std::nullopt;
 }
 
-std::optional<int> left_bound(std::vector<int> nums, int target) {
+optional<int> left_bound(vector<int>& nums, int target) {
     auto left = 0;
     auto right = nums.size();
 
@@ -42,40 +46,41 @@ std::optional<int> left_bound(std::vector<int> nums, int target) {
         return left;
     }
 
-    return std::nullopt;
+    return nullopt;
 }
 
-std::optional<int> right_bound(std::vector<int> nums, int target) {
-    return std::nullopt;
+optional<int> right_bound(vector<int>& nums, int target) {
+    return nullopt;
 }
-} // namespace binary_search
 
 namespace tests {
 class BinarySearchTest : public testing::Test {};
 
 TEST_F(BinarySearchTest, test_ok) {
-    auto nums = std::vector<int>{1, 2, 3, 4, 5};
+    auto nums = vector<int>{1, 2, 3, 4, 5};
     auto loc = binary_search::search(nums, 4);
     ASSERT_EQ(loc, 3);
 }
 
 TEST_F(BinarySearchTest, test_ok_no_tgt_num) {
-    auto nums = std::vector<int>{1, 2, 3, 4, 5};
+    auto nums = vector<int>{1, 2, 3, 4, 5};
     auto loc = binary_search::search(nums, 0);
-    ASSERT_EQ(loc, std::nullopt);
+    ASSERT_EQ(loc, nullopt);
 }
 
 class LeftBoundTest : public testing::Test {};
 
 TEST_F(LeftBoundTest, test_ok) {
-    auto nums = std::vector<int>{1, 3, 3, 3, 5};
+    auto nums = vector<int>{1, 3, 3, 3, 5};
     auto loc = binary_search::left_bound(nums, 3);
     ASSERT_EQ(loc, 1);
 }
 
 TEST_F(LeftBoundTest, test_ok_no_tgt_num) {
-    auto nums = std::vector<int>{1, 2, 3, 4, 5};
+    auto nums = vector<int>{1, 2, 3, 4, 5};
     auto loc = binary_search::left_bound(nums, 0);
-    ASSERT_EQ(loc, std::nullopt);
+    ASSERT_EQ(loc, nullopt);
 }
 } // namespace tests
+
+} // namespace binary_search

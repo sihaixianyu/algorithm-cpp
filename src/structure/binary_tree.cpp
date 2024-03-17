@@ -9,7 +9,14 @@
 #include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
-using namespace std;
+namespace binary_tree {
+using std::cout;
+using std::deque;
+using std::endl;
+using std::function;
+using std::invalid_argument;
+using std::make_tuple;
+using std::vector;
 
 const int null = -1;
 
@@ -21,7 +28,7 @@ struct TreeNode {
     TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
     TreeNode(const TreeNode& other) : val(other.val), left(other.left), right(other.right){};
     ~TreeNode() {
-        fmt::print("[DEL] TreeNode {{ val: {} }}\n", this->val);
+        fmt::println("[DEL] TreeNode {{ val: {} }}", this->val);
     }
 };
 
@@ -398,3 +405,4 @@ TEST(BinaryTreeTest, TestPostorderLoop) {
     delete tree;
 }
 } // namespace tests
+} // namespace binary_tree

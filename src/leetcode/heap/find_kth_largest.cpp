@@ -4,7 +4,10 @@
 #include <queue>
 #include <vector>
 
-using namespace std;
+namespace find_kth_largest {
+using std::greater;
+using std::priority_queue;
+using std::vector;
 
 class Solution {
 public:
@@ -57,3 +60,4 @@ TEST_F(SolutionTest, test_case_2) {
     ASSERT_EQ(res, 4);
 }
 } // namespace tests
+} // namespace find_kth_largest

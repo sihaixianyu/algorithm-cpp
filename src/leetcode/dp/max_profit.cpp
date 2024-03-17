@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-using namespace std;
+namespace max_profit {
+using std::vector;
 
 class Solution {
 public:
@@ -32,3 +33,4 @@ TEST_F(SolutionTest, test_case2) {
     ASSERT_EQ(res, 0);
 }
 } // namespace tests
+} // namespace max_profit

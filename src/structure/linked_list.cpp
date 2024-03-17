@@ -5,7 +5,10 @@
 #include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
-using namespace std;
+namespace linked_list {
+using std::cout;
+using std::endl;
+using std::vector;
 
 struct ListNode {
     int val;
@@ -99,3 +102,4 @@ TEST_F(LinkedListTest, ConstructorTest) {
     delete list;
 }
 } // namespace tests
+} // namespace linked_list

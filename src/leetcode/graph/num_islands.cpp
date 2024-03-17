@@ -1,7 +1,8 @@
 #include <gtest/gtest.h>
 #include <vector>
 
-using namespace std;
+namespace num_islands {
+using std::vector;
 
 class Solution {
 public:
@@ -72,3 +73,4 @@ TEST_F(SolutionTest, test_case2) {
     ASSERT_EQ(island_num, expected);
 }
 } // namespace tests
+} // namespace num_islands
