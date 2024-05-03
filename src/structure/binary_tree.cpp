@@ -10,7 +10,7 @@
 #include <gtest/gtest.h>
 
 namespace binary_tree {
-using std::cout;
+using std::cout; 
 using std::deque;
 using std::endl;
 using std::function;
