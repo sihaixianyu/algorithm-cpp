@@ -15,6 +15,13 @@ target_link_libraries(
     PRIVATE GTest::gtest_main
 )
 
+add_executable(surrounded-regions surrounded_regions.cpp)
+target_link_libraries(
+    surrounded-regions
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
+
 add_executable(all-paths-source-target all_paths_source_target.cpp)
 target_link_libraries(
     all-paths-source-target
