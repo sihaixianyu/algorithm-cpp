@@ -2,8 +2,12 @@
 
 set -e
 
-if [ $# -gt 0 ] && [ $1 -eq 1 ]; then
+if [ $# -gt 0 ] && [ $1 = "-r" ]; then
+    echo "[WARN] All previous build files will be removed!"
     rm -rf build
+else
+    echo "[ERROR] Invaild argument $1 has been passed in!"
+    exit 1
 fi
 
 cmake -S . -B build \
@@ -12,4 +16,5 @@ cmake -S . -B build \
     -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
 
 cd build
-make
+
+make -j 13
