@@ -28,3 +28,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(rotted-oranges rotted_oranges.cpp)
+target_link_libraries(
+    rotted-oranges
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
