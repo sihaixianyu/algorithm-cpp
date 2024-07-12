@@ -35,3 +35,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(can-finish can_finish.cpp)
+target_link_libraries(
+    can-finish
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)

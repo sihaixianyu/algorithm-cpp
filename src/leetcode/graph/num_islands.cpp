@@ -1,5 +1,6 @@
-#include <gtest/gtest.h>
 #include <vector>
+
+#include <gtest/gtest.h>
 
 namespace num_islands {
 using std::vector;
@@ -49,7 +50,7 @@ protected:
     }
 };
 
-TEST_F(SolutionTest, test_case1) {
+TEST_F(SolutionTest, test_case_0) {
     auto grid = vector{
         vector{'1', '1', '1', '1', '0'},
         vector{'1', '1', '0', '1', '0'},
@@ -61,7 +62,7 @@ TEST_F(SolutionTest, test_case1) {
     ASSERT_EQ(island_num, expected);
 }
 
-TEST_F(SolutionTest, test_case2) {
+TEST_F(SolutionTest, test_case_1) {
     auto grid = vector{
         vector{'1', '1', '0', '0', '0'},
         vector{'1', '1', '0', '0', '0'},

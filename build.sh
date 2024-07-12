@@ -14,4 +14,4 @@ cmake -S . -B build \
 
 cd build
 
-make -j 13
+make -j 7
