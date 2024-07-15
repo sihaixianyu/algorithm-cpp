@@ -2,19 +2,25 @@
 Language: Cpp
 BasedOnStyle: LLVM
 
-# Indent
+# General
 UseTab: Never
 IndentWidth: 4
-AccessModifierOffset: -4
+ColumnLimit: 120
+
+# Includes
+SortIncludes: true
+SortUsingDeclarations: true
 
 # Pointer
 PointerAlignment: Left
 DerivePointerAlignment: false
 
-# Collapse
-ColumnLimit: 120
-AllowShortFunctionsOnASingleLine: Empty
-
 # Function
 BinPackParameters: false
+AllowShortFunctionsOnASingleLine: Empty
 AllowAllParametersOfDeclarationOnNextLine: false
+
+# Class
+AccessModifierOffset: -4
+SpaceBeforeCpp11BracedList: true
+BreakConstructorInitializers: BeforeComma
