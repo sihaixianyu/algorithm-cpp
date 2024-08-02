@@ -23,4 +23,6 @@ AllowAllParametersOfDeclarationOnNextLine: false
 # Class
 AccessModifierOffset: -4
 SpaceBeforeCpp11BracedList: true
-BreakConstructorInitializers: BeforeComma
+
+# Template
+AlwaysBreakTemplateDeclarations: true
