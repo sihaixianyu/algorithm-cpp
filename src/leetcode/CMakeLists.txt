@@ -1,4 +1,5 @@
-add_subdirectory(stack)
+add_subdirectory(array)
+add_subdirectory(dp)
 add_subdirectory(graph)
 add_subdirectory(heap)
-add_subdirectory(dp)
+add_subdirectory(stack)
