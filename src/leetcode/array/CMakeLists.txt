@@ -7,3 +7,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(trap trap.cpp)
+target_link_libraries(
+    trap
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
