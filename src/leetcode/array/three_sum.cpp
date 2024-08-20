@@ -83,5 +83,5 @@ TEST(SolutionTest, test_case_3) {
     auto expected = vector<vector<int>> {{-2, 0, 2}};
     ASSERT_EQ(res, expected);
 }
-} // namespace tests
-} // namespace three_sum
+}  // namespace tests
+}  // namespace three_sum
