@@ -7,3 +7,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(min-window min_window.cpp)
+target_link_libraries(
+    min-window
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
