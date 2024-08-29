@@ -14,3 +14,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(merge-intervals merge_intervals.cpp)
+target_link_libraries(
+    merge-intervals
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)

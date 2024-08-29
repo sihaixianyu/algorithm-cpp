@@ -26,3 +26,6 @@ SpaceBeforeCpp11BracedList: true
 
 # Template
 AlwaysBreakTemplateDeclarations: true
+
+# Others
+AlignArrayOfStructures: Left
