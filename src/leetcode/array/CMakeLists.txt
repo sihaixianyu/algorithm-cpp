@@ -21,3 +21,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(rotate-array rotate_array.cpp)
+target_link_libraries(
+    rotate-array
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)

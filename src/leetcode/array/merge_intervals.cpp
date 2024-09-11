@@ -45,6 +45,7 @@ TEST(SolutionTest, test_case_0) {
     };
     ASSERT_EQ(ans, exp);
 }
+
 TEST(SolutionTest, test_case_1) {
     auto intervals = vector<vector<int>> {
         {1, 4},
