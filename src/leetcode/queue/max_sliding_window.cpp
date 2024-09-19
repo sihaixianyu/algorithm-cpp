@@ -2,7 +2,6 @@
 #include <deque>
 #include <vector>
 
-#include "fmt/core.h"
 #include "gtest/gtest.h"
 
 namespace max_sliding_window {

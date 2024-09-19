@@ -8,9 +8,9 @@ target_link_libraries(
     PRIVATE GTest::gtest_main
 )
 
-add_executable(binary_search binary_search.cpp)
+add_executable(binary-search binary_search.cpp)
 target_link_libraries(
-    binary_search
+    binary-search
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )

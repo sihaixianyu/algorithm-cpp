@@ -28,3 +28,10 @@ target_link_libraries(
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(product-except-self product_except_self.cpp)
+target_link_libraries(
+    product-except-self
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
