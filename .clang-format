@@ -1,31 +1,69 @@
 # Global
 Language: Cpp
 BasedOnStyle: Google
-
-# General
-UseTab: Never
-IndentWidth: 4
 ColumnLimit: 120
 
-# Includes
-SortIncludes: true
-SortUsingDeclarations: true
+# Indent
+UseTab: Never
+IndentWidth: 4
+SortIncludes: false
 
-# Pointer
+# Break
+AlwaysBreakAfterDefinitionReturnType: None
+AlwaysBreakBeforeMultilineStrings: false
+BreakBeforeBinaryOperators: None
+BreakBeforeTernaryOperators: true
+BreakConstructorInitializers: BeforeColon
+BreakStringLiterals: true
+BreakBeforeBraces: Custom
+
+# Brace
+BraceWrapping:
+  AfterClass: false
+  AfterControlStatement: false
+  AfterEnum: false
+  AfterFunction: false
+  AfterNamespace: false
+  AfterStruct: false
+  AfterUnion: false
+  AfterExternBlock: false
+  BeforeCatch: false
+  BeforeElse: false
+  IndentBraces: false
+
+# Block
+AllowShortCaseLabelsOnASingleLine: false
+AllowShortEnumsOnASingleLine: false
+AllowShortFunctionsOnASingleLine: Empty
+AllowShortIfStatementsOnASingleLine: false
+AllowShortLoopsOnASingleLine: false
+AllowShortLambdasOnASingleLine: Inline
+
+# Comment
+AlignTrailingComments: true
+
+# Operator
 PointerAlignment: Left
+
+AlignOperands: Align
 DerivePointerAlignment: false
 
 # Function
-BinPackParameters: false
-AllowShortFunctionsOnASingleLine: Empty
+BinPackArguments: true
+BinPackParameters: true
+AlignAfterOpenBracket: Align
 AllowAllParametersOfDeclarationOnNextLine: false
+AllowAllArgumentsOnNextLine: false
+IndentWrappedFunctionNames: false
+Standard: Latest
 
 # Class
 AccessModifierOffset: -4
-SpaceBeforeCpp11BracedList: true
+ContinuationIndentWidth: 4
+ConstructorInitializerIndentWidth: 4
+PackConstructorInitializers: CurrentLine
+Cpp11BracedListStyle: true
 
-# Template
-AlwaysBreakTemplateDeclarations: true
-
-# Others
-AlignArrayOfStructures: Left
+# Namespace
+CompactNamespaces: false
+FixNamespaceComments: true

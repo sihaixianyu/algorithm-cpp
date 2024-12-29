@@ -5,6 +5,7 @@
 #include "gtest/gtest.h"
 
 namespace max_sliding_window {
+
 using std::deque;
 using std::vector;
 
@@ -49,5 +50,6 @@ TEST(SolutionTest, test_case_1) {
     auto exp = vector<int> {1};
     ASSERT_EQ(res, exp);
 }
+
 }  // namespace tests
 }  // namespace max_sliding_window

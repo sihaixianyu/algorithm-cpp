@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 set -e
 
@@ -9,9 +9,8 @@ fi
 
 cmake -S . -B build \
     -DCMAKE_CXX_COMPILER="clang++" \
-    -DCMAKE_TOOLCHAIN_FILE="$VCPKG_HOME/scripts/buildsystems/vcpkg.cmake" \
-    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON
+    -DCMAKE_TOOLCHAIN_FILE="${VCPKG_HOME}/scripts/buildsystems/vcpkg.cmake" \
+    -DCMAKE_EXPORT_COMPILE_COMMANDS=ON \
+    -DCMAKE_BUILD_TYPE=Debug
 
-cd build
-
-make -j 7
+cmake --build build --parallel 7

@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 
-namespace three_sum {
+namespace leetcode {
 using std::vector;
 
 class Solution {
@@ -56,7 +56,10 @@ TEST(SolutionTest, test_case_0) {
     auto nums = vector<int> {-1, 0, 1, 2, -1, -4};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {{-1, -1, 2}, {-1, 0, 1}};
+    auto expected = vector<vector<int>> {
+        {-1, -1, 2},
+        {-1, 0,  1}
+    };
     ASSERT_EQ(res, expected);
 }
 
@@ -72,7 +75,9 @@ TEST(SolutionTest, test_case_2) {
     auto nums = vector<int> {0, 0, 0};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {{0, 0, 0}};
+    auto expected = vector<vector<int>> {
+        {0, 0, 0}
+    };
     ASSERT_EQ(res, expected);
 }
 
@@ -80,8 +85,10 @@ TEST(SolutionTest, test_case_3) {
     auto nums = vector<int> {-2, 0, 0, 2, 2};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {{-2, 0, 2}};
+    auto expected = vector<vector<int>> {
+        {-2, 0, 2}
+    };
     ASSERT_EQ(res, expected);
 }
 }  // namespace tests
-}  // namespace three_sum
+}  // namespace leetcode

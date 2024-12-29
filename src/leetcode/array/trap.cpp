@@ -4,7 +4,7 @@
 
 #include "gtest/gtest.h"
 
-namespace trap {
+namespace leetcode {
 using std::optional;
 using std::vector;
 
@@ -58,4 +58,4 @@ TEST_F(SolutionTest, test_case_1) {
     ASSERT_EQ(res, exp);
 }
 }  // namespace tests
-}  // namespace trap
+}  // namespace leetcode

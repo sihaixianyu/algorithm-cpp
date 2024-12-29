@@ -3,7 +3,7 @@
 
 #include "gtest/gtest.h"
 
-namespace rotate_array {
+namespace leetcode {
 using std::vector;
 
 class Solution {
@@ -50,4 +50,4 @@ TEST(SolutionTest, test_case_1) {
     ASSERT_EQ(nums, exp);
 }
 }  // namespace tests
-}  // namespace rotate_array
+}  // namespace leetcode

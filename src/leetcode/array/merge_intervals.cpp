@@ -3,7 +3,7 @@
 
 #include "gtest/gtest.h"
 
-namespace merge_intervals {
+namespace leetcode {
 using std::vector;
 
 /// @Prob: Merge Intervals
@@ -58,4 +58,4 @@ TEST(SolutionTest, test_case_1) {
     ASSERT_EQ(ans, exp);
 }
 }  // namespace tests
-}  // namespace merge_intervals
+}  // namespace leetcode

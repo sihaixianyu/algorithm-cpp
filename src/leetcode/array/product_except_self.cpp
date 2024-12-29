@@ -2,7 +2,7 @@
 
 #include "gtest/gtest.h"
 
-namespace product_except_self {
+namespace leetcode {
 using std::vector;
 
 class Solution {
@@ -47,4 +47,4 @@ TEST(SolutionTest, test_case_1) {
     ASSERT_EQ(ans, exp);
 }
 }  // namespace tests
-}  // namespace product_except_self
+}  // namespace leetcode
