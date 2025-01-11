@@ -3,6 +3,8 @@
 #include "gtest/gtest.h"
 
 namespace leetcode {
+namespace array {
+namespace spiral_matrix {
 using std::vector;
 
 class Solution {
@@ -34,17 +36,19 @@ public:
 
 namespace tests {
 TEST(SolutionTest, test_case_0) {
-    auto nums = vector {1, 2, 3, 4};
+    auto nums = vector{1, 2, 3, 4};
     auto ans = Solution().productExceptSelf(nums);
-    auto exp = vector {24, 12, 8, 6};
+    auto exp = vector{24, 12, 8, 6};
     ASSERT_EQ(ans, exp);
 }
 
 TEST(SolutionTest, test_case_1) {
-    auto nums = vector {-1, 1, 0, -3, 3};
+    auto nums = vector{-1, 1, 0, -3, 3};
     auto ans = Solution().productExceptSelf(nums);
-    auto exp = vector {0, 0, 9, 0, 0};
+    auto exp = vector{0, 0, 9, 0, 0};
     ASSERT_EQ(ans, exp);
 }
 }  // namespace tests
+}  // namespace spiral_matrix
+}  // namespace array
 }  // namespace leetcode

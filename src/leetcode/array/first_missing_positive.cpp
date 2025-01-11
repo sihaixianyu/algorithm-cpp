@@ -4,15 +4,16 @@
 #include <gtest/gtest.h>
 
 namespace leetcode {
-
+namespace array {
+namespace spiral_matrix {
 using std::swap;
 using std::vector;
 
-/// @Prob: First Missing Positive
-/// @Link: https://leetcode.cn/problems/first-missing-positive/?envType=study-plan-v2&envId=top-100-liked
-/// @Tags: ["array", "sorting"]
 class Solution {
 public:
+    /// @Prob: First Missing Positive
+    /// @Link: https://leetcode.cn/problems/first-missing-positive/?envType=study-plan-v2&envId=top-100-liked
+    /// @Tags: ["array", "sorting"]
     int firstMissingPositive(vector<int>& nums) {
         for (auto i = 0; i < nums.size(); i++) {
             while (nums[i] > 0 && nums[i] < nums.size() && nums[i] != nums[nums[i] - 1]) {
@@ -32,7 +33,6 @@ public:
 };
 
 namespace tests {
-
 TEST(SolutionTest, test_case_0) {
     auto nums = vector{1, 2, 0};
     auto ans = 3;
@@ -72,7 +72,7 @@ TEST(SolutionTest, test_case_4) {
     auto res = Solution().firstMissingPositive(nums);
     ASSERT_EQ(res, ans);
 }
-
 }  // namespace tests
-
+}  // namespace spiral_matrix
+}  // namespace array
 }  // namespace leetcode

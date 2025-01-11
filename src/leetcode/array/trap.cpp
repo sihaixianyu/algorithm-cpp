@@ -5,6 +5,8 @@
 #include "gtest/gtest.h"
 
 namespace leetcode {
+namespace array {
+namespace spiral_matrix {
 using std::optional;
 using std::vector;
 
@@ -45,17 +47,19 @@ protected:
 };
 
 TEST_F(SolutionTest, test_case_0) {
-    auto height = vector {0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
+    auto height = vector{0, 1, 0, 2, 1, 0, 1, 3, 2, 1, 2, 1};
     auto exp = 6;
     auto res = solution_.value().trap(height);
     ASSERT_EQ(res, exp);
 }
 
 TEST_F(SolutionTest, test_case_1) {
-    auto height = vector {4, 2, 0, 3, 2, 5};
+    auto height = vector{4, 2, 0, 3, 2, 5};
     auto exp = 9;
     auto res = solution_.value().trap(height);
     ASSERT_EQ(res, exp);
 }
 }  // namespace tests
+}  // namespace spiral_matrix
+}  // namespace array
 }  // namespace leetcode

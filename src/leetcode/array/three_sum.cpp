@@ -3,6 +3,8 @@
 #include "gtest/gtest.h"
 
 namespace leetcode {
+namespace array {
+namespace spiral_matrix {
 using std::vector;
 
 class Solution {
@@ -34,7 +36,7 @@ public:
                     continue;
                 }
 
-                res.push_back(vector<int> {nums[k], nums[i], nums[j]});
+                res.push_back(vector<int>{nums[k], nums[i], nums[j]});
 
                 while (i < j && nums[i + 1] == nums[i]) {
                     i += 1;
@@ -53,42 +55,37 @@ public:
 
 namespace tests {
 TEST(SolutionTest, test_case_0) {
-    auto nums = vector<int> {-1, 0, 1, 2, -1, -4};
+    auto nums = vector<int>{-1, 0, 1, 2, -1, -4};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {
-        {-1, -1, 2},
-        {-1, 0,  1}
-    };
+    auto expected = vector<vector<int>>{{-1, -1, 2}, {-1, 0, 1}};
     ASSERT_EQ(res, expected);
 }
 
 TEST(SolutionTest, test_case_1) {
-    auto nums = vector<int> {0, 1, 1};
+    auto nums = vector<int>{0, 1, 1};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {};
+    auto expected = vector<vector<int>>{};
     ASSERT_EQ(res, expected);
 }
 
 TEST(SolutionTest, test_case_2) {
-    auto nums = vector<int> {0, 0, 0};
+    auto nums = vector<int>{0, 0, 0};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {
-        {0, 0, 0}
-    };
+    auto expected = vector<vector<int>>{{0, 0, 0}};
     ASSERT_EQ(res, expected);
 }
 
 TEST(SolutionTest, test_case_3) {
-    auto nums = vector<int> {-2, 0, 0, 2, 2};
+    auto nums = vector<int>{-2, 0, 0, 2, 2};
     auto res = Solution().threeSum(nums);
 
-    auto expected = vector<vector<int>> {
-        {-2, 0, 2}
-    };
+    auto expected = vector<vector<int>>{{-2, 0, 2}};
     ASSERT_EQ(res, expected);
 }
 }  // namespace tests
+}  // namespace spiral_matrix
+}  // namespace array
 }  // namespace leetcode
