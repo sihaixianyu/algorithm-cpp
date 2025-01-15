@@ -1,12 +1,10 @@
 #include <array>
 #include <vector>
 
-#include <fmt/base.h>
 #include <gtest/gtest.h>
 
 namespace leetcode {
 namespace array {
-namespace spiral_matrix {
 using std::array;
 using std::vector;
 
@@ -31,7 +29,6 @@ public:
 
         while (cnt < total_elems) {
             res[cnt] = matrix[i][j];
-            fmt::println("{} ({}, {}) => {}", cnt, i, j, res[cnt]);
             cnt += 1;
 
             auto next_i = i + directions[idx][0];
@@ -89,6 +86,5 @@ TEST(SolutionTest, test_case_1) {
     ASSERT_EQ(res, ans);
 }
 }  // namespace tests
-}  // namespace spiral_matrix
 }  // namespace array
 }  // namespace leetcode

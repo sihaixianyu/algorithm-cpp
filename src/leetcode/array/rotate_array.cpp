@@ -5,7 +5,6 @@
 
 namespace leetcode {
 namespace array {
-namespace spiral_matrix {
 using std::vector;
 
 class Solution {
@@ -52,6 +51,5 @@ TEST(SolutionTest, test_case_1) {
     ASSERT_EQ(nums, exp);
 }
 }  // namespace tests
-}  // namespace spiral_matrix
 }  // namespace array
 }  // namespace leetcode

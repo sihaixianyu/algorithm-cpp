@@ -42,3 +42,9 @@ target_link_libraries(spiral-matrix
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(rotate-image rotate_image.cpp)
+target_link_libraries(rotate-image
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
