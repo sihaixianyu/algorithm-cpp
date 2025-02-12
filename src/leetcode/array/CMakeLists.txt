@@ -48,3 +48,9 @@ target_link_libraries(rotate-image
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(search-matrix search_matrix.cpp)
+target_link_libraries(search-matrix
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)
