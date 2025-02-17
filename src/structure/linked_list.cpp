@@ -1,4 +1,5 @@
-#include <iostream>
+#include "linked_list.h"
+
 #include <vector>
 
 #include <fmt/core.h>
@@ -6,33 +7,7 @@
 #include <gtest/gtest.h>
 
 namespace linked_list {
-using std::cout;
-using std::endl;
 using std::vector;
-
-struct ListNode {
-    int val;
-    ListNode* next;
-    ListNode() : val(0), next(nullptr) {}
-    ListNode(int x) : val(x), next(nullptr) {}
-    ListNode(int x, ListNode* next) : val(x), next(next) {}
-    ~ListNode() noexcept {
-        cout << "[DEL] ListNode { val: " << this->val << " }" << endl;
-    }
-};
-
-class LinkedList {
-public:
-    ListNode* head;
-
-    explicit LinkedList() : head(nullptr){};
-    explicit LinkedList(const vector<int>& nums);
-
-    LinkedList(const LinkedList& other) = delete;
-    LinkedList& operator=(const LinkedList& other) = delete;
-
-    ~LinkedList() noexcept;
-};
 
 LinkedList::LinkedList(const vector<int>& nums) {
     if (nums.size() == 0) {
@@ -53,8 +28,6 @@ LinkedList::LinkedList(const vector<int>& nums) {
 }
 
 LinkedList::~LinkedList() noexcept {
-    cout << "[DEL] LinkedList in addr: " << this << endl;
-
     auto curr = this->head;
 
     while (curr != nullptr) {

@@ -1,3 +1,5 @@
+#include "binary_tree.h"
+
 #include <deque>
 #include <functional>
 #include <iostream>
@@ -5,12 +7,12 @@
 #include <tuple>
 #include <vector>
 
-#include <fmt/core.h>
+#include <fmt/base.h>
 #include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
 namespace binary_tree {
-using std::cout; 
+using std::cout;
 using std::deque;
 using std::endl;
 using std::function;
@@ -20,23 +22,11 @@ using std::vector;
 
 const int null = -1;
 
-struct TreeNode {
-    int val;
-    TreeNode* left;
-    TreeNode* right;
-
-    TreeNode(int x) : val(x), left(nullptr), right(nullptr) {}
-    TreeNode(const TreeNode& other) : val(other.val), left(other.left), right(other.right){};
-    ~TreeNode() {
-        fmt::println("[DEL] TreeNode {{ val: {} }}", this->val);
-    }
-};
-
 class BinaryTree {
 public:
     TreeNode* root;
 
-    explicit BinaryTree(TreeNode* root) : root(nullptr){};
+    explicit BinaryTree(TreeNode* root) : root(nullptr) {};
     explicit BinaryTree(const vector<int>& nums);
 
     BinaryTree(const BinaryTree& other) = delete;
@@ -404,5 +394,5 @@ TEST(BinaryTreeTest, TestPostorderLoop) {
 
     delete tree;
 }
-} // namespace tests
-} // namespace binary_tree
+}  // namespace tests
+}  // namespace binary_tree
