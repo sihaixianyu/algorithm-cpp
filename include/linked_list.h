@@ -2,18 +2,15 @@
 
 #include <vector>
 
-#include <fmt/base.h>
+namespace structure {
 
-namespace linked_list {
 struct ListNode {
     int val;
     ListNode* next;
     ListNode() : val(0), next(nullptr) {}
     ListNode(int x) : val(x), next(nullptr) {}
     ListNode(int x, ListNode* next) : val(x), next(next) {}
-    ~ListNode() noexcept {
-        fmt::println("[ListNode] This node has been freed. ==> val={} <==", this->val);
-    }
+    ~ListNode() noexcept {};
 };
 
 class LinkedList {
@@ -31,4 +28,7 @@ public:
 
     ~LinkedList() noexcept;
 };
-}  // namespace linked_list
+
+std::vector<int> traverse(ListNode* head);
+
+}  // namespace structure
