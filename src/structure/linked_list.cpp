@@ -2,16 +2,17 @@
 
 #include <vector>
 
+#include <fmt/base.h>
 #include <fmt/core.h>
 #include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
-namespace linked_list {
+namespace structure {
+
 using std::vector;
 
 LinkedList::LinkedList(const vector<int>& nums) {
     if (nums.size() == 0) {
-
         return;
     }
 
@@ -51,28 +52,4 @@ vector<int> traverse(ListNode* head) {
     return nums;
 }
 
-namespace tests {
-class LinkedListTest : public testing::Test {
-protected:
-    vector<int> input_1;
-    vector<int> expected_1;
-
-    LinkedListTest() {
-        this->input_1 = vector{1, 2, 3, 4};
-        this->expected_1 = vector{1, 2, 3, 4};
-    }
-
-    ~LinkedListTest() {}
-};
-
-TEST_F(LinkedListTest, ConstructorTest) {
-    vector<int> ans;
-
-    auto list = new LinkedList(this->input_1);
-    ans = traverse(list->head);
-    ASSERT_EQ(ans, this->expected_1);
-
-    delete list;
-}
-} // namespace tests
-} // namespace linked_list
+}  // namespace structure
