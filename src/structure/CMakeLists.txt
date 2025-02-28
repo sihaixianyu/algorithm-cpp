@@ -25,3 +25,9 @@ target_link_libraries(binary-tree-test
     PRIVATE fmt::fmt
     PRIVATE GTest::gtest_main
 )
+
+add_executable(lru-cache-test lru_cache.cpp)
+target_link_libraries(lru-cache-test
+    PRIVATE fmt::fmt
+    PRIVATE GTest::gtest_main
+)

@@ -1,6 +1,11 @@
+#pragma once
+
+#include <vector>
+
 #include <fmt/base.h>
 
-namespace binary_tree {
+namespace structure {
+
 struct TreeNode {
     int val;
     TreeNode* left;
@@ -12,4 +17,18 @@ struct TreeNode {
         fmt::println("[TreeNode] This node has been freed. ==> val={} <==", this->val);
     }
 };
-}  // namespace binary_tree
+
+class BinaryTree {
+public:
+    TreeNode* root;
+
+    explicit BinaryTree(TreeNode* root) : root(nullptr) {};
+    explicit BinaryTree(const std::vector<int>& nums);
+
+    BinaryTree(const BinaryTree& other) = delete;
+    BinaryTree& operator=(const BinaryTree& other) = delete;
+
+    ~BinaryTree() noexcept;
+};
+
+}  // namespace structure

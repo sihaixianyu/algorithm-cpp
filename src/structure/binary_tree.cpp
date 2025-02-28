@@ -11,7 +11,7 @@
 #include <fmt/ranges.h>
 #include <gtest/gtest.h>
 
-namespace binary_tree {
+namespace structure {
 
 using std::cout;
 using std::deque;
@@ -21,20 +21,7 @@ using std::invalid_argument;
 using std::make_tuple;
 using std::vector;
 
-const int null = -1;
-
-class BinaryTree {
-public:
-    TreeNode* root;
-
-    explicit BinaryTree(TreeNode* root) : root(nullptr) {};
-    explicit BinaryTree(const vector<int>& nums);
-
-    BinaryTree(const BinaryTree& other) = delete;
-    BinaryTree& operator=(const BinaryTree& other) = delete;
-
-    ~BinaryTree() noexcept;
-};
+constexpr int null = -1;
 
 BinaryTree::BinaryTree(const vector<int>& nums) {
     if (nums.empty())
@@ -247,4 +234,4 @@ vector<int> postorder_loop(const TreeNode* root) {
     return ans;
 }
 
-}  // namespace binary_tree
+}  // namespace structure

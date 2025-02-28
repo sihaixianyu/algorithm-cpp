@@ -6,7 +6,7 @@ ColumnLimit: 120
 # Indent
 UseTab: Never
 IndentWidth: 4
-SortIncludes: false
+SortIncludes: true
 
 # Break
 AlwaysBreakAfterDefinitionReturnType: None
