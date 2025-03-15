@@ -1,7 +1,7 @@
+#include <vector>
+
 #include <fmt/base.h>
 #include <gtest/gtest.h>
-
-#include <vector>
 
 #include "linked_list.h"
 
@@ -15,7 +15,7 @@ class Solution {
 public:
     ListNode* reverseKGroup(ListNode* head, int k) {
         auto nextHead = head;
-        
+
         for (auto i = 0; i < k; i++) {
             if (!nextHead) {
                 return head;
@@ -39,7 +39,7 @@ public:
             prev = curr;
             curr = next;
         }
-        
+
         return prev;
     }
 };
