@@ -8,9 +8,6 @@ namespace array {
 namespace spiral_matrix {
 using std::vector;
 
-/// @Prob: Merge Intervals
-/// @Link: https://leetcode.cn/problems/merge-intervals/?envType=study-plan-v2&envId=top-100-liked
-/// @Tags: ["array", "sorting"]
 class Solution {
 public:
     vector<vector<int>> merge(vector<vector<int>>& intervals) {

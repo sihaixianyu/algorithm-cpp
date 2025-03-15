@@ -10,9 +10,6 @@ using std::vector;
 
 class Solution {
 public:
-    /// @Prob: First Missing Positive
-    /// @Link: https://leetcode.cn/problems/first-missing-positive/?envType=study-plan-v2&envId=top-100-liked
-    /// @Tags: ["array", "sorting"]
     int firstMissingPositive(vector<int>& nums) {
         for (auto i = 0; i < nums.size(); i++) {
             while (nums[i] > 0 && nums[i] < nums.size() && nums[i] != nums[nums[i] - 1]) {

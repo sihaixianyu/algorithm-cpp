@@ -10,9 +10,6 @@ using std::vector;
 
 class Solution {
 public:
-    /// @Prob: Spiral Matrix
-    /// @Link: https://leetcode.cn/problems/spiral-matrix/?envType=study-plan-v2&envId=top-100-liked
-    /// @Tags: ["Array", "Matrix", "Simulation"]
     vector<int> spiralOrder(vector<vector<int>>& matrix) {
         auto btm = 0;
         auto top = static_cast<int>(matrix.size() - 1);

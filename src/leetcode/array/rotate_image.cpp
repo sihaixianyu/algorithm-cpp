@@ -8,9 +8,6 @@ using std::vector;
 
 class Solution {
 public:
-    /// @Prob: Rotate Image
-    /// @Link: https://leetcode.cn/problems/rotate-image/description/?envType=study-plan-v2&envId=top-100-liked
-    /// @Tags: ["Array", "Math", "Matrix"]
     void rotate(vector<vector<int>>& matrix) {
         auto n = matrix.size();
 

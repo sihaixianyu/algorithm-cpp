@@ -3,7 +3,6 @@
 
 #include <gtest/gtest.h>
 
-// Number of Enclves: https://leetcode.cn/problems/number-of-enclaves/description/
 namespace num_enclaves {
 using std::array;
 using std::vector;

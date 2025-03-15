@@ -9,9 +9,6 @@ using std::vector;
 
 class Solution {
 public:
-    /// @Prob: Search Matrix
-    /// @Link: https://leetcode.cn/problems/search-a-2d-matrix-ii/description/?envType=study-plan-v2&envId=top-100-liked
-    /// @Tags: ["Array", "Matrix"]
     bool searchMatrix(vector<vector<int>>& matrix, int target) {
         auto m = matrix.size() - 1;
         auto n = matrix[0].size() - 1;

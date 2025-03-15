@@ -14,9 +14,6 @@ using structure::ListNode;
 
 class Solution {
 public:
-    /// @Prob: Rotate Image
-    /// @Link: https://leetcode.cn/problems/reverse-linked-list/submissions/602388943/?envType=study-plan-v2&envId=top-100-liked
-    /// @Tags: ["LinkedList", "Recursively"]
     ListNode* reverseList(ListNode* head) {
         reverseHelper(head);
         return tail;

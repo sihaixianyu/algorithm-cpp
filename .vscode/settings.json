@@ -1,3 +1,5 @@
 {
-    "Codegeex.Chat.LanguagePreference": "English"
+    "editor.fontSize": 14,
+    "window.commandCenter": false,
+    "workbench.layoutControl.enabled": false
 }
