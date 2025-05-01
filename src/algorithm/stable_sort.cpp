@@ -1,0 +1,157 @@
+#include <algorithm>
+#include <functional>
+#include <vector>
+
+#include <fmt/core.h>
+#include <fmt/ranges.h>
+#include <gtest/gtest.h>
+
+namespace sort {
+using std::function;
+using std::swap;
+using std::vector;
+
+vector<int> bubble_sort(vector<int>& nums) {
+    auto ans = vector(nums);
+
+    for (auto i = ans.size() - 1; i > 0; i--) {
+        for (auto j = 0; j < i; j++) {
+            if (ans[j] > ans[j + 1]) {
+                swap(ans[j], ans[j + 1]);
+            }
+        }
+    }
+
+    return ans;
+}
+
+vector<int> insert_sort(const vector<int>& nums) {
+    auto ans = vector<int>(nums);
+
+    for (auto i = 1; i < ans.size(); i++) {
+        auto ins_val = ans[i];
+        auto j = i - 1;
+        for (; j >= 0; j--) {
+            if (ans[j] <= ins_val) {
+                break;
+            }
+            ans[j + 1] = ans[j];
+        }
+        ans[j + 1] = ins_val;
+    }
+
+    return ans;
+}
+
+vector<int> merge_sort(const vector<int>& nums) {
+    auto ans = vector<int>(nums);
+
+    auto merge = [&](int left, int mid, int right) {
+        auto lp = left;
+        auto rp = mid + 1;
+        auto tmp = vector<int>();
+
+        while (lp <= mid && rp <= right) {
+            if (ans[lp] < ans[rp]) {
+                tmp.push_back(ans[lp]);
+                lp += 1;
+            } else {
+                tmp.push_back(ans[rp]);
+                rp += 1;
+            }
+        }
+
+        while (lp <= mid) {
+            tmp.push_back(ans[lp]);
+            lp += 1;
+        }
+        while (rp <= right) {
+            tmp.push_back(ans[rp]);
+            rp += 1;
+        }
+
+        for (auto i = left; i <= right; i++) {
+            ans[i] = tmp[i - left];
+        }
+    };
+
+    function<void(int, int)> helper = [&](int left, int right) {
+        if (left >= right) {
+            return;
+        }
+
+        auto mid = left + (right - left) / 2;
+
+        helper(left, mid);
+        helper(mid + 1, right);
+        merge(left, mid, right);
+    };
+
+    helper(0, ans.size() - 1);
+
+    return ans;
+}
+
+namespace tests {
+class SortTest : public testing::Test {
+protected:
+    vector<int> input1, input2, input3;
+    vector<int> expected1, expected2, expected3;
+
+    void SetUp() override {
+        this->input1 = vector{1, 2, 3, 4};
+        this->expected1 = vector{1, 2, 3, 4};
+
+        this->input2 = vector{5, 4, 3, 2, 1};
+        this->expected2 = vector{1, 2, 3, 4, 5};
+
+        this->input3 = vector{6, 2, 3, 1, 5, 4};
+        this->expected3 = vector{1, 2, 3, 4, 5, 6};
+    }
+
+    void TearDown() override {
+    }
+};
+
+TEST_F(SortTest, test_bubble_sort) {
+    vector<int> real;
+
+    real = sort::bubble_sort(this->input1);
+    ASSERT_EQ(real, this->expected1);
+
+    real = sort::bubble_sort(this->input2);
+    ASSERT_EQ(real, this->expected2);
+
+    real = sort::bubble_sort(this->input3);
+    ASSERT_EQ(real, this->expected3);
+
+    this->expected3.push_back(5);
+}
+
+TEST_F(SortTest, test_insert_sort) {
+    vector<int> real;
+
+    real = sort::insert_sort(this->input1);
+    EXPECT_EQ(real, this->expected1);
+
+    real = sort::insert_sort(this->input2);
+    ASSERT_EQ(real, this->expected2);
+
+    real = sort::insert_sort(this->input3);
+    ASSERT_EQ(real, this->expected3);
+}
+
+TEST_F(SortTest, test_merge_sort) {
+    vector<int> real;
+
+    real = sort::merge_sort(this->input1);
+    EXPECT_EQ(real, this->expected1);
+
+    real = sort::merge_sort(this->input2);
+    ASSERT_EQ(real, this->expected2);
+
+    real = sort::merge_sort(this->input3);
+    ASSERT_EQ(real, this->expected3);
+}
+} // namespace tests
+} // namespace sort
