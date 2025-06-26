@@ -2,9 +2,7 @@
 
 #include <deque>
 #include <functional>
-#include <iostream>
 #include <stdexcept>
-#include <tuple>
 #include <vector>
 
 #include <fmt/base.h>
@@ -12,13 +10,9 @@
 #include <gtest/gtest.h>
 
 namespace structure {
-
-using std::cout;
 using std::deque;
-using std::endl;
 using std::function;
 using std::invalid_argument;
-using std::make_tuple;
 using std::vector;
 
 constexpr int null = -1;
@@ -54,7 +48,7 @@ BinaryTree::BinaryTree(const vector<int>& nums) {
         nodes[i]->right = nodes[2 * i + 2];
     }
 
-    this->root = nodes[0];
+    this->root_ = nodes[0];
 }
 
 BinaryTree::~BinaryTree() noexcept {
@@ -69,11 +63,65 @@ BinaryTree::~BinaryTree() noexcept {
         delete root;
     };
 
-    destroy(this->root);
-    this->root = nullptr;
+    destroy(this->root_);
+    this->root_ = nullptr;
 };
 
-vector<int> level_traverse(const TreeNode* root) {
+vector<int> BinaryTree::preorder_traverse(const TreeNode* root) {
+    auto ans = vector<int>();
+
+    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        ans.push_back(root->val);
+        helper(root->left);
+        helper(root->right);
+    };
+
+    helper(root);
+
+    return ans;
+}
+
+vector<int> BinaryTree::inorder_traverse(const TreeNode* root) {
+    auto ans = vector<int>();
+
+    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        helper(root->left);
+        ans.push_back(root->val);
+        helper(root->right);
+    };
+
+    helper(root);
+
+    return ans;
+}
+
+vector<int> BinaryTree::postorder_traverse(const TreeNode* root) {
+    auto ans = vector<int>();
+
+    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
+        if (root == nullptr) {
+            return;
+        }
+
+        helper(root->left);
+        helper(root->right);
+        ans.push_back(root->val);
+    };
+
+    helper(root);
+
+    return ans;
+}
+
+vector<int> BinaryTree::level_traverse(const TreeNode* root) {
     if (root == nullptr)
         return vector<int>();
 
@@ -95,143 +143,4 @@ vector<int> level_traverse(const TreeNode* root) {
 
     return ans;
 }
-
-vector<int> preorder_traverse(const TreeNode* root) {
-    auto ans = vector<int>();
-
-    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
-        if (root == nullptr) {
-            return;
-        }
-
-        ans.push_back(root->val);
-        helper(root->left);
-        helper(root->right);
-    };
-
-    helper(root);
-
-    return ans;
-}
-
-vector<int> preorder_loop(const TreeNode* root) {
-    auto ans = vector<int>();
-    auto stk = vector{make_tuple(root, 0)};
-
-    while (!stk.empty()) {
-        auto [node, tag] = stk.back();
-        stk.pop_back();
-
-        if (tag == 1) {
-            ans.push_back(node->val);
-            cout << fmt::format("Node {{ val: {} }}", node->val) << endl;
-            continue;
-        }
-
-        if (node->right != nullptr) {
-            stk.push_back(make_tuple(node->right, 0));
-        }
-
-        if (node->left != nullptr) {
-            stk.push_back(make_tuple(node->left, 0));
-        }
-
-        stk.push_back(make_tuple(node, 1));
-    }
-
-    return ans;
-}
-
-vector<int> inorder_traverse(const TreeNode* root) {
-    auto ans = vector<int>();
-
-    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
-        if (root == nullptr) {
-            return;
-        }
-
-        helper(root->left);
-        ans.push_back(root->val);
-        helper(root->right);
-    };
-
-    helper(root);
-
-    return ans;
-}
-
-vector<int> inorder_loop(const TreeNode* root) {
-    auto ans = vector<int>();
-    auto stk = vector{make_tuple(root, 0)};
-
-    while (!stk.empty()) {
-        auto [node, tag] = stk.back();
-        stk.pop_back();
-
-        if (tag == 1) {
-            ans.push_back(node->val);
-            cout << fmt::format("Node {{ val: {} }}", node->val) << endl;
-            continue;
-        }
-
-        if (node->right != nullptr) {
-            stk.push_back(make_tuple(node->right, 0));
-        }
-
-        stk.push_back(make_tuple(node, 1));
-
-        if (node->left != nullptr) {
-            stk.push_back(make_tuple(node->left, 0));
-        }
-    }
-
-    return ans;
-}
-
-vector<int> postorder_traverse(const TreeNode* root) {
-    auto ans = vector<int>();
-
-    function<void(const TreeNode*)> helper = [&](const TreeNode* root) {
-        if (root == nullptr) {
-            return;
-        }
-
-        helper(root->left);
-        helper(root->right);
-        ans.push_back(root->val);
-    };
-
-    helper(root);
-
-    return ans;
-}
-
-vector<int> postorder_loop(const TreeNode* root) {
-    auto ans = vector<int>();
-    auto stk = vector{make_tuple(root, 0)};
-
-    while (!stk.empty()) {
-        auto [node, tag] = stk.back();
-        stk.pop_back();
-
-        if (tag == 1) {
-            ans.push_back(node->val);
-            cout << fmt::format("Node {{ val: {} }}", node->val) << endl;
-            continue;
-        }
-
-        stk.push_back(make_tuple(node, 1));
-
-        if (node->right != nullptr) {
-            stk.push_back(make_tuple(node->right, 0));
-        }
-
-        if (node->left != nullptr) {
-            stk.push_back(make_tuple(node->left, 0));
-        }
-    }
-
-    return ans;
-}
-
 }  // namespace structure
